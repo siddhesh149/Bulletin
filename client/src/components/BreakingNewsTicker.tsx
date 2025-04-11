@@ -20,7 +20,7 @@ const BreakingNewsTicker: React.FC = () => {
     : "Loading breaking news...";
 
   return (
-    <div className="bg-secondary text-white py-2 overflow-hidden relative">
+    <div className="bg-red-600 text-white py-2 overflow-hidden relative">
       <div className="container mx-auto px-4">
         <div className="flex">
           <div className="font-bold whitespace-nowrap mr-4">BREAKING NEWS:</div>
