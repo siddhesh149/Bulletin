@@ -1,0 +1,125 @@
+import React from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { Link } from 'wouter';
+import ArticleCard from './ArticleCard';
+import TimeAgo from './TimeAgo';
+import ViewCounter from './ViewCounter';
+
+type Article = {
+  id: number;
+  title: string;
+  slug: string;
+  summary: string;
+  imageUrl: string;
+  category: string;
+  viewCount: number;
+  createdAt: string;
+};
+
+const HeroSection: React.FC = () => {
+  const { data: featuredArticles, isLoading, error } = useQuery<Article[]>({
+    queryKey: ['/api/articles/featured'],
+  });
+
+  if (isLoading) {
+    return (
+      <section className="py-6">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div className="lg:col-span-2 bg-gray-200 animate-pulse h-96"></div>
+            <div className="space-y-6">
+              <div className="bg-gray-200 animate-pulse h-44"></div>
+              <div className="bg-gray-200 animate-pulse h-44"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  if (error || !featuredArticles || featuredArticles.length === 0) {
+    return (
+      <section className="py-6">
+        <div className="container mx-auto px-4">
+          <div className="bg-white p-6 text-center">
+            <p className="text-red-500">Unable to load featured articles</p>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  const mainArticle = featuredArticles[0];
+  const secondaryArticles = featuredArticles.slice(1);
+
+  return (
+    <section className="py-6">
+      <div className="container mx-auto px-4">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {/* Main featured article */}
+          <div className="lg:col-span-2">
+            <Link href={`/article/${mainArticle.slug}`}>
+              <a className="block">
+                <article className="bg-white shadow-sm hover:shadow-md transition">
+                  <div>
+                    <img 
+                      src={mainArticle.imageUrl} 
+                      alt={mainArticle.title} 
+                      className="w-full h-64 lg:h-80 object-cover"
+                    />
+                    <div className="p-4">
+                      <span className="bg-primary text-white text-xs px-2 py-1">
+                        {mainArticle.category.charAt(0).toUpperCase() + mainArticle.category.slice(1)}
+                      </span>
+                      <h2 className="text-2xl font-headline font-bold mt-2 mb-3">{mainArticle.title}</h2>
+                      <p className="text-neutral-600 mb-3">{mainArticle.summary}</p>
+                      <div className="flex items-center text-sm text-neutral-600">
+                        <span className="mr-3">
+                          <i className="far fa-clock mr-1"></i> <TimeAgo timestamp={mainArticle.createdAt} />
+                        </span>
+                        <ViewCounter count={mainArticle.viewCount} />
+                      </div>
+                    </div>
+                  </div>
+                </article>
+              </a>
+            </Link>
+          </div>
+          
+          {/* Secondary featured articles */}
+          <div className="space-y-6">
+            {secondaryArticles.map((article) => (
+              <Link key={article.id} href={`/article/${article.slug}`}>
+                <a className="block">
+                  <article className="bg-white shadow-sm hover:shadow-md transition">
+                    <div className="flex flex-col sm:flex-row lg:flex-col">
+                      <img 
+                        src={article.imageUrl} 
+                        alt={article.title} 
+                        className="w-full sm:w-1/3 lg:w-full h-48 object-cover"
+                      />
+                      <div className="p-4 sm:w-2/3 lg:w-full">
+                        <span className="bg-primary text-white text-xs px-2 py-1">
+                          {article.category.charAt(0).toUpperCase() + article.category.slice(1)}
+                        </span>
+                        <h2 className="text-xl font-headline font-bold mt-2 mb-3">{article.title}</h2>
+                        <div className="flex items-center text-sm text-neutral-600">
+                          <span className="mr-3">
+                            <i className="far fa-clock mr-1"></i> <TimeAgo timestamp={article.createdAt} />
+                          </span>
+                          <ViewCounter count={article.viewCount} />
+                        </div>
+                      </div>
+                    </div>
+                  </article>
+                </a>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default HeroSection;
