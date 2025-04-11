@@ -5,7 +5,6 @@ import BreakingNewsTicker from '@/components/BreakingNewsTicker';
 import HeroSection from '@/components/HeroSection';
 import LatestNewsSection from '@/components/LatestNewsSection';
 import CategorySection from '@/components/CategorySection';
-import OpinionSection from '@/components/OpinionSection';
 
 const HomePage: React.FC = () => {
   return (
@@ -29,7 +28,6 @@ const HomePage: React.FC = () => {
         </div>
       </section>
       
-      <OpinionSection />
       <Footer />
     </div>
   );

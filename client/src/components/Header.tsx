@@ -145,13 +145,7 @@ const Header: React.FC = () => {
                 </a>
               </Link>
             </li>
-            <li>
-              <Link href="/category/opinion">
-                <a className={`px-3 py-2 block hover:bg-blue-900 transition ${location === '/category/opinion' ? 'bg-blue-900' : ''}`}>
-                  Opinion
-                </a>
-              </Link>
-            </li>
+
           </ul>
         </div>
       </nav>
@@ -234,13 +228,7 @@ const Header: React.FC = () => {
                   </a>
                 </Link>
               </li>
-              <li>
-                <Link href="/category/opinion">
-                  <a className="block py-2 border-b" onClick={() => setMobileMenuOpen(false)}>
-                    Opinion
-                  </a>
-                </Link>
-              </li>
+
             </ul>
           </div>
         </div>
