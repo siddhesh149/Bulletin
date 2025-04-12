@@ -1,74 +1,61 @@
 import { drizzle } from "drizzle-orm/postgres-js";
-import postgres from "postgres";
+import postgres, { Notice } from "postgres";
 import { log } from "./vite";
+import { env } from "./env";
 
 const MAX_RETRIES = 5;
 const RETRY_DELAY = 5000; // 5 seconds
 
-if (!process.env.DATABASE_URL) {
-  throw new Error('DATABASE_URL environment variable is not set');
-}
+// Initialize the database connection with the validated connection string
+const connectionString: string = env.DATABASE_URL;
 
-// Initialize the database connection
-const connectionString = process.env.DATABASE_URL;
+// Configure postgres with more resilient settings
 const client = postgres(connectionString, {
   max: 1,
   idle_timeout: 20,
-  connect_timeout: 10,
+  connect_timeout: 30,
   ssl: {
-    rejectUnauthorized: true,
-    requestCert: true
+    rejectUnauthorized: false // Required for CockroachDB
   },
   connection: {
     application_name: 'NewsBulletin'
+  },
+  keep_alive: 30,
+  debug: env.NODE_ENV === 'development',
+  transform: {
+    undefined: null,
+  },
+  onnotice: (notice: Notice) => {
+    log('Database notice:', notice.message);
   }
 });
 
 export const db = drizzle(client);
 
-async function createDbConnection(retryCount = 0) {
-  try {
-    const maskedUrl = connectionString.replace(/:[^:@]+@/, ':****@');
-    log(`Attempting to connect to database with URL: ${maskedUrl}`);
-    
-    // Test the connection with a simple query
-    const result = await client`SELECT version()`;
-    log(`Connected to database: ${result[0].version}`);
-    return db;
-  } catch (error: any) {
-    const errorMessage = error?.message || 'Unknown error';
-    const errorStack = error?.stack || '';
-    log(`Database connection attempt ${retryCount + 1} failed: ${errorMessage}`);
-    log(`Error stack: ${errorStack}`);
-    
-    if (retryCount < MAX_RETRIES) {
-      log(`Retrying in ${RETRY_DELAY / 1000} seconds... (Attempt ${retryCount + 1}/${MAX_RETRIES})`);
-      await new Promise(resolve => setTimeout(resolve, RETRY_DELAY));
-      return createDbConnection(retryCount + 1);
+async function createDbConnection() {
+  let retryCount = 0;
+  while (retryCount < MAX_RETRIES) {
+    try {
+      const maskedUrl = connectionString.replace(/:[^:@]+@/, ':****@');
+      log(`Attempting database connection (attempt ${retryCount + 1}/${MAX_RETRIES}) to ${maskedUrl}`);
+      
+      // Test the connection
+      await client`SELECT 1`;
+      log('Database connection successful');
+      return client;
+    } catch (error: any) {
+      retryCount++;
+      if (retryCount < MAX_RETRIES) {
+        log(`Connection attempt failed, retrying in ${RETRY_DELAY/1000} seconds...`);
+        log(`Error details: ${error?.message}`);
+        await new Promise(resolve => setTimeout(resolve, RETRY_DELAY));
+      } else {
+        throw new Error(`Failed to connect to database after ${MAX_RETRIES} attempts: ${error?.message}`);
+      }
     }
-    
-    throw new Error(`Failed to connect to database after ${MAX_RETRIES} attempts. Last error: ${errorMessage}`);
   }
+  throw new Error('Failed to connect to database');
 }
 
-export const initDb = async () => {
-  try {
-    await createDbConnection();
-    return db;
-  } catch (error: any) {
-    log(`Fatal database error: ${error?.message || 'Unknown error'}`);
-    process.exit(1); // Exit if we can't connect to the database
-  }
-};
-
-// Handle cleanup on application shutdown
-process.on('SIGINT', async () => {
-  try {
-    await client.end();
-    log('Database connection closed.');
-    process.exit(0);
-  } catch (error: any) {
-    log('Error closing database connection:', error?.message || 'Unknown error');
-    process.exit(1);
-  }
-});
+// Export the connection function and db instance
+export { createDbConnection };

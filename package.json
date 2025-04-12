@@ -11,7 +11,9 @@
     "db:push": "drizzle-kit push",
     "db:seed": "ts-node --project tsconfig.json server/seed.ts",
     "seed": "cross-env NODE_ENV=development tsx server/seed.ts",
-    "migrate": "cross-env NODE_ENV=production tsx server/migrate.ts"
+    "migrate": "cross-env NODE_ENV=production tsx server/migrate.ts",
+    "test:db": "cross-env NODE_ENV=development tsx server/test-connection.ts",
+    "test:db:prod": "cross-env NODE_ENV=production tsx server/test-connection.ts"
   },
   "dependencies": {
     "@faker-js/faker": "^9.6.0",
@@ -51,6 +53,7 @@
     "@tailwindcss/typography": "^0.5.15",
     "@tanstack/react-query": "^5.60.5",
     "@types/bcrypt": "^5.0.2",
+    "@types/pg": "^8.11.12",
     "@vitejs/plugin-react": "^4.3.2",
     "autoprefixer": "^10.4.20",
     "bcrypt": "^5.1.1",
@@ -60,6 +63,7 @@
     "connect-pg-simple": "^10.0.0",
     "cross-env": "^7.0.3",
     "date-fns": "^3.6.0",
+    "dotenv": "^16.5.0",
     "drizzle-orm": "^0.39.3",
     "drizzle-zod": "^0.7.0",
     "embla-carousel-react": "^8.3.0",

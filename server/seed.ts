@@ -73,34 +73,33 @@ async function seed() {
         }
       ];
 
-      await db.insert(articles).values(sampleArticles);
+      const [article1, article2] = await db.insert(articles)
+        .values(sampleArticles)
+        .returning();
       log("Created sample articles");
 
-      // Create sample breaking news
-      const sampleBreakingNews = [
-        {
-          content: "Breaking: Major technological breakthrough in renewable energy announced",
+      // Create breaking news
+      await db.insert(breakingNews)
+        .values({
+          content: "Welcome to NewsBulletin! Stay tuned for the latest updates.",
           active: true
-        },
-        {
-          content: "Update: International space mission successfully completed",
-          active: true
-        }
-      ];
+        })
+        .returning();
+      log("Created breaking news");
 
-      await db.insert(breakingNews).values(sampleBreakingNews);
-      log("Created sample breaking news");
-
-      log("Seeding completed successfully!");
+      log("Database seeding completed successfully!");
       process.exit(0);
     } catch (error: any) {
       retries--;
       if (retries === 0) {
         log(`Seeding failed after all retries: ${error?.message}`);
+        if (error.detail) log(`Error detail: ${error.detail}`);
         process.exit(1);
       }
       log(`Seeding attempt failed, retrying in 5 seconds... (${retries} retries left)`);
-      await sleep(5000); // Wait 5 seconds before retrying
+      log(`Error details: ${error?.message}`);
+      if (error.detail) log(`Error detail: ${error.detail}`);
+      await sleep(5000);
     }
   }
 }
