@@ -1,4 +1,4 @@
-import { db } from './db';
+import { db, createDbConnection } from './db';
 import { articles, breakingNews, users } from '../shared/schema';
 import { log } from './vite';
 import bcrypt from 'bcrypt';
@@ -10,6 +10,16 @@ async function seed() {
   while (retries > 0) {
     try {
       log("Starting database seeding...");
+
+      // Ensure database connection is established
+      await createDbConnection();
+      log("Database connection established");
+
+      // Clear existing data
+      await db.delete(breakingNews);
+      await db.delete(articles);
+      await db.delete(users);
+      log("Cleared existing data");
 
       // Create a test user
       const hashedPassword = await bcrypt.hash("admin123", 10);
@@ -28,7 +38,7 @@ async function seed() {
           title: "The Future of AI in Journalism",
           slug: "future-of-ai-journalism",
           summary: "How artificial intelligence is transforming the news industry",
-          content: "Artificial intelligence is revolutionizing how news is gathered, written, and distributed...",
+          content: "Artificial intelligence is revolutionizing how news is gathered, written, and distributed. From automated content generation to personalized news delivery, AI is reshaping journalism in unprecedented ways. This article explores the latest developments and their implications for the future of news media.",
           imageUrl: "https://source.unsplash.com/random/800x600/?technology",
           category: "technology",
           authorName: "John Smith",
@@ -40,7 +50,7 @@ async function seed() {
           title: "Global Economic Trends 2024",
           slug: "global-economic-trends-2024",
           summary: "Analysis of major economic developments shaping the world",
-          content: "The global economy continues to face unprecedented challenges and opportunities...",
+          content: "The global economy continues to face unprecedented challenges and opportunities. From emerging markets to technological disruption, this comprehensive analysis examines key trends that will shape economic landscapes in 2024 and beyond.",
           imageUrl: "https://source.unsplash.com/random/800x600/?business",
           category: "business",
           authorName: "Sarah Johnson",
@@ -52,7 +62,7 @@ async function seed() {
           title: "Climate Change: Latest Research",
           slug: "climate-change-research-2024",
           summary: "New findings in climate science and their implications",
-          content: "Recent studies reveal accelerating impacts of climate change across the globe...",
+          content: "Recent studies reveal accelerating impacts of climate change across the globe. This article presents the latest research findings, their implications for our planet, and potential solutions being developed by scientists worldwide.",
           imageUrl: "https://source.unsplash.com/random/800x600/?climate",
           category: "science",
           authorName: "Dr. Michael Chen",
@@ -64,7 +74,7 @@ async function seed() {
           title: "Sports Review: Major Events",
           slug: "sports-review-major-events",
           summary: "Recap of the biggest sporting events and achievements",
-          content: "This year has seen remarkable achievements in various sports disciplines...",
+          content: "This year has seen remarkable achievements in various sports disciplines. From record-breaking performances to unexpected victories, we cover the most significant moments that defined sports in recent times.",
           imageUrl: "https://source.unsplash.com/random/800x600/?sports",
           category: "sports",
           authorName: "Alex Thompson",
@@ -73,7 +83,7 @@ async function seed() {
         }
       ];
 
-      const [article1, article2] = await db.insert(articles)
+      await db.insert(articles)
         .values(sampleArticles)
         .returning();
       log("Created sample articles");
