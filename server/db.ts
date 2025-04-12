@@ -57,5 +57,17 @@ async function createDbConnection() {
   throw new Error('Failed to connect to database');
 }
 
+// Initialize database connection
+export async function initDb() {
+  try {
+    await createDbConnection();
+    log('Database initialized successfully');
+    return db;
+  } catch (error: any) {
+    log('Failed to initialize database:', error?.message);
+    throw error;
+  }
+}
+
 // Export the connection function and db instance
 export { createDbConnection };
