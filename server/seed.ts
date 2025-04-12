@@ -39,10 +39,10 @@ async function seed() {
           slug: "future-of-ai-journalism",
           summary: "How artificial intelligence is transforming the news industry",
           content: "Artificial intelligence is revolutionizing how news is gathered, written, and distributed. From automated content generation to personalized news delivery, AI is reshaping journalism in unprecedented ways. This article explores the latest developments and their implications for the future of news media.",
-          imageUrl: "https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg",
+          imageUrl: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e",
           category: "technology",
           authorName: "John Smith",
-          authorImageUrl: "https://images.pexels.com/photos/2379005/pexels-photo-2379005.jpeg",
+          authorImageUrl: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e",
           published: true,
           featuredOrder: 1
         },
@@ -51,10 +51,10 @@ async function seed() {
           slug: "global-economic-trends-2024",
           summary: "Analysis of major economic developments shaping the world",
           content: "The global economy continues to face unprecedented challenges and opportunities. From emerging markets to technological disruption, this comprehensive analysis examines key trends that will shape economic landscapes in 2024 and beyond.",
-          imageUrl: "https://images.pexels.com/photos/187041/pexels-photo-187041.jpeg",
+          imageUrl: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3",
           category: "business",
           authorName: "Sarah Johnson",
-          authorImageUrl: "https://images.pexels.com/photos/1181686/pexels-photo-1181686.jpeg",
+          authorImageUrl: "https://images.unsplash.com/photo-1494790108377-be9c29b29330",
           published: true,
           featuredOrder: 2
         },
@@ -63,10 +63,10 @@ async function seed() {
           slug: "climate-change-research-2024",
           summary: "New findings in climate science and their implications",
           content: "Recent studies reveal accelerating impacts of climate change across the globe. This article presents the latest research findings, their implications for our planet, and potential solutions being developed by scientists worldwide.",
-          imageUrl: "https://images.pexels.com/photos/2990650/pexels-photo-2990650.jpeg",
+          imageUrl: "https://images.unsplash.com/photo-1611273426858-450d8e3c9fce",
           category: "science",
           authorName: "Dr. Michael Chen",
-          authorImageUrl: "https://images.pexels.com/photos/5490276/pexels-photo-5490276.jpeg",
+          authorImageUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d",
           published: true,
           featuredOrder: 3
         },
@@ -75,10 +75,10 @@ async function seed() {
           slug: "major-political-reforms-2024",
           summary: "Key policy changes and their impact on governance",
           content: "Recent political developments have led to significant reforms in governance and policy-making. This comprehensive analysis examines the implications of these changes and their potential impact on various sectors of society.",
-          imageUrl: "https://images.pexels.com/photos/1550337/pexels-photo-1550337.jpeg",
+          imageUrl: "https://images.unsplash.com/photo-1529107386315-e1a2ed48a620",
           category: "politics",
           authorName: "Emily Rodriguez",
-          authorImageUrl: "https://images.pexels.com/photos/3796217/pexels-photo-3796217.jpeg",
+          authorImageUrl: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80",
           published: true,
           featuredOrder: 4
         },
@@ -87,10 +87,10 @@ async function seed() {
           slug: "medical-breakthrough-2024",
           summary: "Revolutionary treatment shows promising results",
           content: "Scientists have announced a significant breakthrough in medical research, potentially transforming how we treat various conditions. This article explores the implications of this discovery and its potential impact on healthcare.",
-          imageUrl: "https://images.pexels.com/photos/3825586/pexels-photo-3825586.jpeg",
+          imageUrl: "https://images.unsplash.com/photo-1576671081837-49000212a370",
           category: "health",
           authorName: "Dr. Amanda White",
-          authorImageUrl: "https://images.pexels.com/photos/4173251/pexels-photo-4173251.jpeg",
+          authorImageUrl: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e",
           published: true
         },
         {
@@ -120,10 +120,10 @@ async function seed() {
           slug: "global-diplomatic-developments",
           summary: "Key international relations and diplomatic events",
           content: "Recent diplomatic developments have reshaped international relations and global cooperation. This article examines the major events and their implications for world politics.",
-          imageUrl: "https://images.pexels.com/photos/1462630/pexels-photo-1462630.jpeg",
+          imageUrl: "https://images.unsplash.com/photo-1532375810709-75b1da00537c",
           category: "world",
           authorName: "David Wilson",
-          authorImageUrl: "https://images.pexels.com/photos/2379005/pexels-photo-2379005.jpeg",
+          authorImageUrl: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e",
           published: true
         }
       ];
