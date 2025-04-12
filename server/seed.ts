@@ -71,6 +71,40 @@ async function seed() {
           featuredOrder: 3
         },
         {
+          title: "Major Political Reforms Announced",
+          slug: "major-political-reforms-2024",
+          summary: "Key policy changes and their impact on governance",
+          content: "Recent political developments have led to significant reforms in governance and policy-making. This comprehensive analysis examines the implications of these changes and their potential impact on various sectors of society.",
+          imageUrl: "https://images.pexels.com/photos/1550337/pexels-photo-1550337.jpeg",
+          category: "politics",
+          authorName: "Emily Rodriguez",
+          authorImageUrl: "https://images.pexels.com/photos/3796217/pexels-photo-3796217.jpeg",
+          published: true,
+          featuredOrder: 4
+        },
+        {
+          title: "Breakthrough in Medical Research",
+          slug: "medical-breakthrough-2024",
+          summary: "Revolutionary treatment shows promising results",
+          content: "Scientists have announced a significant breakthrough in medical research, potentially transforming how we treat various conditions. This article explores the implications of this discovery and its potential impact on healthcare.",
+          imageUrl: "https://images.pexels.com/photos/3825586/pexels-photo-3825586.jpeg",
+          category: "health",
+          authorName: "Dr. Amanda White",
+          authorImageUrl: "https://images.pexels.com/photos/4173251/pexels-photo-4173251.jpeg",
+          published: true
+        },
+        {
+          title: "Entertainment Industry Evolution",
+          slug: "entertainment-industry-evolution",
+          summary: "How digital platforms are reshaping entertainment",
+          content: "The entertainment industry is undergoing a massive transformation with the rise of digital platforms and changing consumer preferences. This analysis explores the latest trends and future predictions.",
+          imageUrl: "https://images.pexels.com/photos/2747449/pexels-photo-2747449.jpeg",
+          category: "entertainment",
+          authorName: "Mark Thompson",
+          authorImageUrl: "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg",
+          published: true
+        },
+        {
           title: "Sports Review: Major Events",
           slug: "sports-review-major-events",
           summary: "Recap of the biggest sporting events and achievements",
@@ -79,6 +113,17 @@ async function seed() {
           category: "sports",
           authorName: "Alex Thompson",
           authorImageUrl: "https://images.pexels.com/photos/3778603/pexels-photo-3778603.jpeg",
+          published: true
+        },
+        {
+          title: "Global Diplomatic Developments",
+          slug: "global-diplomatic-developments",
+          summary: "Key international relations and diplomatic events",
+          content: "Recent diplomatic developments have reshaped international relations and global cooperation. This article examines the major events and their implications for world politics.",
+          imageUrl: "https://images.pexels.com/photos/1462630/pexels-photo-1462630.jpeg",
+          category: "world",
+          authorName: "David Wilson",
+          authorImageUrl: "https://images.pexels.com/photos/2379005/pexels-photo-2379005.jpeg",
           published: true
         }
       ];
@@ -91,7 +136,7 @@ async function seed() {
       // Create breaking news
       await db.insert(breakingNews)
         .values({
-          content: "Welcome to NewsBulletin! Stay tuned for the latest updates.",
+          content: "Welcome to NewsBulletin! Stay tuned for the latest updates across technology, business, politics, and more.",
           active: true
         })
         .returning();

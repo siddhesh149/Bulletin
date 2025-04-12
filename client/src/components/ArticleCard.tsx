@@ -15,6 +15,20 @@ type ArticleCardProps = {
   compact?: boolean;
 };
 
+const getCategoryColor = (category: string): string => {
+  const colors: { [key: string]: string } = {
+    technology: 'bg-blue-600',
+    business: 'bg-green-600',
+    science: 'bg-purple-600',
+    sports: 'bg-red-600',
+    politics: 'bg-orange-600',
+    entertainment: 'bg-pink-600',
+    health: 'bg-teal-600',
+    world: 'bg-indigo-600'
+  };
+  return colors[category.toLowerCase()] || 'bg-gray-600';
+};
+
 const ArticleCard: React.FC<ArticleCardProps> = ({
   title,
   slug,
@@ -32,7 +46,7 @@ const ArticleCard: React.FC<ArticleCardProps> = ({
           <img 
             src={imageUrl} 
             alt={title} 
-            className="w-20 h-20 object-cover"
+            className="w-20 h-20 object-cover rounded-md"
           />
           <div>
             <h4 className="font-semibold leading-tight">{title}</h4>
@@ -48,16 +62,18 @@ const ArticleCard: React.FC<ArticleCardProps> = ({
   return (
     <Link href={`/article/${slug}`}>
       <a className="block">
-        <article className="bg-white shadow-sm hover:shadow-md transition">
-          <img 
-            src={imageUrl} 
-            alt={title} 
-            className="w-full h-48 object-cover"
-          />
-          <div className="p-4">
-            <span className="bg-primary text-white text-xs px-2 py-1">
+        <article className="bg-white shadow-sm hover:shadow-md transition rounded-lg overflow-hidden">
+          <div className="relative">
+            <img 
+              src={imageUrl} 
+              alt={title} 
+              className="w-full h-48 object-cover"
+            />
+            <span className={`absolute top-4 left-4 ${getCategoryColor(category)} text-white text-xs px-3 py-1 rounded-full font-medium shadow-md`}>
               {category.charAt(0).toUpperCase() + category.slice(1)}
             </span>
+          </div>
+          <div className="p-4">
             <h3 className="text-lg font-headline font-bold mt-2 mb-2">{title}</h3>
             {summary && <p className="text-sm text-neutral-600 mb-2">{summary}</p>}
             <div className="flex items-center text-sm text-neutral-600">
