@@ -5,10 +5,13 @@ import { log } from "./vite";
 const MAX_RETRIES = 5;
 const RETRY_DELAY = 5000; // 5 seconds
 
+// Initialize the database connection
+const sql = neon(process.env.DATABASE_URL!);
+export const db = drizzle(sql);
+
 async function createDbConnection(retryCount = 0) {
   try {
-    const sql: NeonQueryFunction<false, false> = neon(process.env.DATABASE_URL!);
-    const db = drizzle(sql);
+    await sql`SELECT 1`; // Test the connection
     log("Database connected successfully");
     return db;
   } catch (error: any) {
@@ -26,7 +29,7 @@ async function createDbConnection(retryCount = 0) {
 
 export const initDb = async () => {
   try {
-    const db = await createDbConnection();
+    await createDbConnection();
     return db;
   } catch (error: any) {
     log(`Fatal database error: ${error?.message || 'Unknown error'}`);
