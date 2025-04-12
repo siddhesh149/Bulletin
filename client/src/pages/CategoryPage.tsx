@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
 import { useRoute, Link } from 'wouter';
 import { useQuery } from '@tanstack/react-query';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
-import ArticleCard from '@/components/ArticleCard';
-import { Pagination } from '@/components/ui/pagination';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
+import ArticleCard from '../components/ArticleCard';
+import { Pagination, PaginationContent, PaginationItem, PaginationNext, PaginationPrevious } from '../components/ui/pagination';
+import { getQueryFn } from '../lib/queryClient';
 
 type Article = {
   id: number;
@@ -26,6 +27,7 @@ const CategoryPage: React.FC = () => {
 
   const { data: articles, isLoading, error } = useQuery<Article[]>({
     queryKey: [`/api/articles/category/${category}?limit=${ARTICLES_PER_PAGE}&offset=${(page - 1) * ARTICLES_PER_PAGE}`, category, page],
+    queryFn: getQueryFn<Article[]>({ on401: "throw" }),
     enabled: !!category,
   });
 
@@ -99,23 +101,33 @@ const CategoryPage: React.FC = () => {
             
             <div className="mt-8 flex justify-center">
               <Pagination>
-                <Pagination.PrevButton onClick={() => page > 1 && handlePageChange(page - 1)} disabled={page === 1} />
-                {[...Array(3)].map((_, i) => {
-                  const pageNumber = page - 1 + i;
-                  if (pageNumber > 0) {
-                    return (
-                      <Pagination.Item
-                        key={pageNumber}
-                        isActive={pageNumber === page}
-                        onClick={() => handlePageChange(pageNumber)}
-                      >
-                        {pageNumber}
-                      </Pagination.Item>
-                    );
-                  }
-                  return null;
-                })}
-                <Pagination.NextButton onClick={() => articles.length === ARTICLES_PER_PAGE && handlePageChange(page + 1)} disabled={articles.length < ARTICLES_PER_PAGE} />
+                <PaginationContent>
+                  <PaginationItem>
+                    <PaginationPrevious size="default" onClick={() => page > 1 && handlePageChange(page - 1)} />
+                  </PaginationItem>
+                  {[...Array(3)].map((_, i) => {
+                    const pageNumber = page - 1 + i;
+                    if (pageNumber > 0) {
+                      return (
+                        <PaginationItem key={pageNumber}>
+                          <a
+                            onClick={() => handlePageChange(pageNumber)}
+                            className={`cursor-pointer px-4 py-2 ${pageNumber === page ? 'bg-primary text-white' : 'hover:bg-gray-100'}`}
+                          >
+                            {pageNumber}
+                          </a>
+                        </PaginationItem>
+                      );
+                    }
+                    return null;
+                  })}
+                  <PaginationItem>
+                    <PaginationNext 
+                      size="default"
+                      onClick={() => articles.length === ARTICLES_PER_PAGE && handlePageChange(page + 1)} 
+                    />
+                  </PaginationItem>
+                </PaginationContent>
               </Pagination>
             </div>
           </>

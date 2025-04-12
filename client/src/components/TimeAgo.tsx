@@ -14,16 +14,25 @@ const TimeAgo: React.FC<TimeAgoProps> = ({ timestamp }) => {
     
     let timeAgo;
     if (diffInSeconds < 60) {
-      timeAgo = `${diffInSeconds} ${diffInSeconds === 1 ? 'sec' : 'secs'} ago`;
+      timeAgo = 'Just now';
     } else if (diffInSeconds < 3600) {
       const minutes = Math.floor(diffInSeconds / 60);
-      timeAgo = `${minutes} ${minutes === 1 ? 'min' : 'mins'} ago`;
+      timeAgo = `${minutes} ${minutes === 1 ? 'minute' : 'minutes'} ago`;
     } else if (diffInSeconds < 86400) {
       const hours = Math.floor(diffInSeconds / 3600);
       timeAgo = `${hours} ${hours === 1 ? 'hour' : 'hours'} ago`;
-    } else {
+    } else if (diffInSeconds < 604800) {
       const days = Math.floor(diffInSeconds / 86400);
       timeAgo = `${days} ${days === 1 ? 'day' : 'days'} ago`;
+    } else if (diffInSeconds < 2592000) {
+      const weeks = Math.floor(diffInSeconds / 604800);
+      timeAgo = `${weeks} ${weeks === 1 ? 'week' : 'weeks'} ago`;
+    } else if (diffInSeconds < 31536000) {
+      const months = Math.floor(diffInSeconds / 2592000);
+      timeAgo = `${months} ${months === 1 ? 'month' : 'months'} ago`;
+    } else {
+      const years = Math.floor(diffInSeconds / 31536000);
+      timeAgo = `${years} ${years === 1 ? 'year' : 'years'} ago`;
     }
     
     setTimeAgo(timeAgo);
