@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRoute, Link } from 'wouter';
 import { useQuery } from '@tanstack/react-query';
 import Header from '@/components/Header';
@@ -30,6 +30,12 @@ type ArticleResponse = {
 const ArticlePage: React.FC = () => {
   const [match, params] = useRoute('/article/:slug');
   const slug = params?.slug || '';
+  const [imgError, setImgError] = useState(false);
+  const fallbackImage = "https://via.placeholder.com/800x600?text=News+Media";
+
+  const handleImageError = () => {
+    setImgError(true);
+  };
 
   const { data, isLoading, error } = useQuery<ArticleResponse>({
     queryKey: [`/api/articles/${slug}`, slug],
@@ -154,9 +160,10 @@ const ArticlePage: React.FC = () => {
           <div className="lg:col-span-2">
             <figure className="mb-6">
               <img 
-                src={article.imageUrl} 
+                src={imgError ? fallbackImage : article.imageUrl} 
                 alt={article.title} 
                 className="w-full h-auto"
+                onError={handleImageError}
               />
             </figure>
             

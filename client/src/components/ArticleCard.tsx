@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'wouter';
 import TimeAgo from './TimeAgo';
 import ViewCounter from './ViewCounter';
@@ -39,14 +39,22 @@ const ArticleCard: React.FC<ArticleCardProps> = ({
   createdAt,
   compact = false
 }) => {
+  const [imgError, setImgError] = useState(false);
+  const fallbackImage = "https://via.placeholder.com/800x600?text=News+Media";
+
+  const handleImageError = () => {
+    setImgError(true);
+  };
+
   if (compact) {
     return (
       <Link href={`/article/${slug}`}>
         <a className="flex gap-3 hover:text-primary">
           <img 
-            src={imageUrl} 
+            src={imgError ? fallbackImage : imageUrl} 
             alt={title} 
             className="w-20 h-20 object-cover rounded-md"
+            onError={handleImageError}
           />
           <div>
             <h4 className="font-semibold leading-tight">{title}</h4>
@@ -65,9 +73,10 @@ const ArticleCard: React.FC<ArticleCardProps> = ({
         <article className="bg-white shadow-sm hover:shadow-md transition rounded-lg overflow-hidden">
           <div className="relative">
             <img 
-              src={imageUrl} 
+              src={imgError ? fallbackImage : imageUrl} 
               alt={title} 
               className="w-full h-48 object-cover"
+              onError={handleImageError}
             />
             <span className={`absolute top-4 left-4 ${getCategoryColor(category)} text-white text-xs px-3 py-1 rounded-full font-medium shadow-md`}>
               {category.charAt(0).toUpperCase() + category.slice(1)}

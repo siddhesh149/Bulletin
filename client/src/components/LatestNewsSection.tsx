@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Link } from 'wouter';
 import ArticleCard from './ArticleCard';
@@ -17,6 +17,16 @@ type Article = {
 };
 
 const LatestNewsSection: React.FC = () => {
+  const [imgErrors, setImgErrors] = useState<{[key: number]: boolean}>({});
+  const fallbackImage = "https://via.placeholder.com/800x600?text=News+Media";
+
+  const handleImageError = (articleId: number) => {
+    setImgErrors(prev => ({
+      ...prev,
+      [articleId]: true
+    }));
+  };
+
   const { data: latestArticles, isLoading, error } = useQuery<Article[]>({
     queryKey: ['/api/articles/latest'],
   });
@@ -76,9 +86,10 @@ const LatestNewsSection: React.FC = () => {
               <Link href={`/article/${article.slug}`}>
                 <a>
                   <img 
-                    src={article.imageUrl} 
+                    src={imgErrors[article.id] ? fallbackImage : article.imageUrl} 
                     alt={article.title} 
                     className="w-full h-48 object-cover mb-3"
+                    onError={() => handleImageError(article.id)}
                   />
                   <span className="bg-primary text-white text-xs px-2 py-1">
                     {article.category.charAt(0).toUpperCase() + article.category.slice(1)}
