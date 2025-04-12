@@ -1,5 +1,5 @@
-import { drizzle } from "drizzle-orm/neon-serverless";
-import { neon, NeonQueryFunction } from "@neondatabase/serverless";
+import { drizzle } from "drizzle-orm/neon-http";
+import { neon } from "@neondatabase/serverless";
 import { log } from "./vite";
 
 const MAX_RETRIES = 5;
@@ -11,9 +11,13 @@ export const db = drizzle(sql);
 
 async function createDbConnection(retryCount = 0) {
   try {
-    await sql`SELECT 1`; // Test the connection
-    log("Database connected successfully");
-    return db;
+    // Test the connection with a simple query
+    const result = await sql`SELECT 1`;
+    if (result) {
+      log("Database connected successfully");
+      return db;
+    }
+    throw new Error("Database connection test failed");
   } catch (error: any) {
     log(`Database connection attempt ${retryCount + 1} failed: ${error?.message || 'Unknown error'}`);
     
