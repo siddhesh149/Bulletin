@@ -39,10 +39,10 @@ async function seed() {
           slug: "future-of-ai-journalism",
           summary: "How artificial intelligence is transforming the news industry",
           content: "Artificial intelligence is revolutionizing how news is gathered, written, and distributed. From automated content generation to personalized news delivery, AI is reshaping journalism in unprecedented ways. This article explores the latest developments and their implications for the future of news media.",
-          imageUrl: "https://source.unsplash.com/random/800x600/?technology",
+          imageUrl: "https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg",
           category: "technology",
           authorName: "John Smith",
-          authorImageUrl: "https://source.unsplash.com/random/100x100/?person",
+          authorImageUrl: "https://images.pexels.com/photos/2379005/pexels-photo-2379005.jpeg",
           published: true,
           featuredOrder: 1
         },
@@ -51,10 +51,10 @@ async function seed() {
           slug: "global-economic-trends-2024",
           summary: "Analysis of major economic developments shaping the world",
           content: "The global economy continues to face unprecedented challenges and opportunities. From emerging markets to technological disruption, this comprehensive analysis examines key trends that will shape economic landscapes in 2024 and beyond.",
-          imageUrl: "https://source.unsplash.com/random/800x600/?business",
+          imageUrl: "https://images.pexels.com/photos/187041/pexels-photo-187041.jpeg",
           category: "business",
           authorName: "Sarah Johnson",
-          authorImageUrl: "https://source.unsplash.com/random/100x100/?woman",
+          authorImageUrl: "https://images.pexels.com/photos/1181686/pexels-photo-1181686.jpeg",
           published: true,
           featuredOrder: 2
         },
@@ -63,10 +63,10 @@ async function seed() {
           slug: "climate-change-research-2024",
           summary: "New findings in climate science and their implications",
           content: "Recent studies reveal accelerating impacts of climate change across the globe. This article presents the latest research findings, their implications for our planet, and potential solutions being developed by scientists worldwide.",
-          imageUrl: "https://source.unsplash.com/random/800x600/?climate",
+          imageUrl: "https://images.pexels.com/photos/2990650/pexels-photo-2990650.jpeg",
           category: "science",
           authorName: "Dr. Michael Chen",
-          authorImageUrl: "https://source.unsplash.com/random/100x100/?scientist",
+          authorImageUrl: "https://images.pexels.com/photos/5490276/pexels-photo-5490276.jpeg",
           published: true,
           featuredOrder: 3
         },
@@ -75,10 +75,10 @@ async function seed() {
           slug: "sports-review-major-events",
           summary: "Recap of the biggest sporting events and achievements",
           content: "This year has seen remarkable achievements in various sports disciplines. From record-breaking performances to unexpected victories, we cover the most significant moments that defined sports in recent times.",
-          imageUrl: "https://source.unsplash.com/random/800x600/?sports",
+          imageUrl: "https://images.pexels.com/photos/46798/the-ball-stadion-football-the-pitch-46798.jpeg",
           category: "sports",
           authorName: "Alex Thompson",
-          authorImageUrl: "https://source.unsplash.com/random/100x100/?athlete",
+          authorImageUrl: "https://images.pexels.com/photos/3778603/pexels-photo-3778603.jpeg",
           published: true
         }
       ];
