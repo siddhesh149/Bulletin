@@ -2,7 +2,7 @@ services:
   - type: web
     name: newsbulletin
     env: node
-    buildCommand: npm install && npm run build && npm run migrate && npm run seed
+    buildCommand: npm install && npm run build && sleep 10 && npm run migrate && sleep 5 && npm run seed
     startCommand: npm start
     envVars:
       - key: NODE_ENV
