@@ -1,17 +1,21 @@
-import { 
-  users, type User, type InsertUser,
-  articles, type Article, type InsertArticle,
-  articleViews, type ArticleView,
-  breakingNews, type BreakingNews
+import type { 
+  InsertUser,
+  InsertArticle,
 } from "@shared/schema";
+import { users, articles, articleViews, breakingNews } from "@shared/schema";
 import { db } from "./db";
-import { eq, sql, desc, and, count, gte, lte } from "drizzle-orm";
+import { eq, sql, desc, and, count } from "drizzle-orm";
 import { log } from "./vite";
+
+type User = typeof users.$inferSelect;
+type Article = typeof articles.$inferSelect;
+type ArticleView = typeof articleViews.$inferSelect;
+type BreakingNews = typeof breakingNews.$inferSelect;
 
 // Storage interface
 export interface IStorage {
   // User operations
-  getUser(id: number): Promise<User | undefined>;
+  getUser(id: string): Promise<User | undefined>;
   getUserByUsername(username: string): Promise<User | undefined>;
   createUser(user: InsertUser): Promise<User>;
   
@@ -22,23 +26,23 @@ export interface IStorage {
   getFeaturedArticles(limit?: number): Promise<Article[]>;
   getLatestArticles(limit?: number): Promise<Article[]>;
   createArticle(article: InsertArticle): Promise<Article>;
-  updateArticle(id: number, article: Partial<InsertArticle>): Promise<Article | undefined>;
-  deleteArticle(id: number): Promise<boolean>;
+  updateArticle(id: string, article: Partial<InsertArticle>): Promise<Article | undefined>;
+  deleteArticle(id: string): Promise<boolean>;
   
   // Article view operations
-  recordArticleView(articleId: number, ipAddress?: string): Promise<ArticleView>;
-  getArticleViewCount(articleId: number): Promise<number>;
-  getArticleViewsByTimeRange(articleId: number, startDate: Date, endDate: Date): Promise<number>;
+  recordArticleView(articleId: string, ipAddress?: string): Promise<ArticleView>;
+  getArticleViewCount(articleId: string): Promise<number>;
+  getArticleViewsByTimeRange(articleId: string, startDate: Date, endDate: Date): Promise<number>;
   
   // Breaking news operations
   getActiveBreakingNews(): Promise<BreakingNews[]>;
   createBreakingNews(content: string): Promise<BreakingNews>;
-  updateBreakingNews(id: number, content: string, active: boolean): Promise<BreakingNews | undefined>;
+  updateBreakingNews(id: string, content: string, active: boolean): Promise<BreakingNews | undefined>;
 }
 
 export class DatabaseStorage implements IStorage {
   // User operations
-  async getUser(id: number): Promise<User | undefined> {
+  async getUser(id: string): Promise<User | undefined> {
     try {
       const [user] = await db.select().from(users).where(eq(users.id, id));
       return user || undefined;
@@ -148,7 +152,7 @@ export class DatabaseStorage implements IStorage {
     }
   }
   
-  async updateArticle(id: number, article: Partial<InsertArticle>): Promise<Article | undefined> {
+  async updateArticle(id: string, article: Partial<InsertArticle>): Promise<Article | undefined> {
     try {
       const [updatedArticle] = await db.update(articles)
         .set({
@@ -164,7 +168,7 @@ export class DatabaseStorage implements IStorage {
     }
   }
   
-  async deleteArticle(id: number): Promise<boolean> {
+  async deleteArticle(id: string): Promise<boolean> {
     try {
       const [deletedArticle] = await db.delete(articles)
         .where(eq(articles.id, id))
@@ -177,7 +181,7 @@ export class DatabaseStorage implements IStorage {
   }
   
   // Article view operations
-  async recordArticleView(articleId: number, ipAddress?: string): Promise<ArticleView> {
+  async recordArticleView(articleId: string, ipAddress?: string): Promise<ArticleView> {
     try {
       const [view] = await db.insert(articleViews)
         .values({
@@ -192,7 +196,7 @@ export class DatabaseStorage implements IStorage {
     }
   }
   
-  async getArticleViewCount(articleId: number): Promise<number> {
+  async getArticleViewCount(articleId: string): Promise<number> {
     try {
       const [result] = await db.select({ count: count() })
         .from(articleViews)
@@ -204,14 +208,14 @@ export class DatabaseStorage implements IStorage {
     }
   }
   
-  async getArticleViewsByTimeRange(articleId: number, startDate: Date, endDate: Date): Promise<number> {
+  async getArticleViewsByTimeRange(articleId: string, startDate: Date, endDate: Date): Promise<number> {
     try {
       const [result] = await db.select({ count: count() })
         .from(articleViews)
         .where(and(
           eq(articleViews.articleId, articleId),
-          gte(articleViews.viewedAt, startDate),
-          lte(articleViews.viewedAt, endDate)
+          sql`${articleViews.viewedAt} >= ${startDate}`,
+          sql`${articleViews.viewedAt} <= ${endDate}`
         ));
       return result?.count || 0;
     } catch (error: any) {
@@ -245,7 +249,7 @@ export class DatabaseStorage implements IStorage {
     }
   }
   
-  async updateBreakingNews(id: number, content: string, active: boolean): Promise<BreakingNews | undefined> {
+  async updateBreakingNews(id: string, content: string, active: boolean): Promise<BreakingNews | undefined> {
     try {
       const [updatedNews] = await db.update(breakingNews)
         .set({ content, active })
@@ -259,4 +263,5 @@ export class DatabaseStorage implements IStorage {
   }
 }
 
+// Export storage instance
 export const storage = new DatabaseStorage();
