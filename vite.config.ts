@@ -29,5 +29,10 @@ export default defineConfig({
   build: {
     outDir: path.resolve(__dirname, "dist/public"),
     emptyOutDir: true,
+    rollupOptions: {
+      output: {
+        dir: path.resolve(__dirname, "dist/public")
+      }
+    }
   },
 });

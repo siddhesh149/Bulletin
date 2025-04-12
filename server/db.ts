@@ -1,21 +1,35 @@
-import { drizzle } from 'drizzle-orm/node-postgres';
-import pkg from 'pg';
-const { Pool } = pkg;
+import { drizzle } from "drizzle-orm/neon-serverless";
+import { neon, NeonQueryFunction } from "@neondatabase/serverless";
+import { log } from "./vite";
 
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  max: 20,
-  idleTimeoutMillis: 30000,
-  connectionTimeoutMillis: 2000,
-});
+const MAX_RETRIES = 5;
+const RETRY_DELAY = 5000; // 5 seconds
 
-// Test the connection immediately
-pool.query('SELECT NOW()', (err, res) => {
-  if (err) {
-    console.error('Database connection failed:', err);
-  } else {
-    console.log('Database connected successfully');
+async function createDbConnection(retryCount = 0) {
+  try {
+    const sql: NeonQueryFunction<false, false> = neon(process.env.DATABASE_URL!);
+    const db = drizzle(sql);
+    log("Database connected successfully");
+    return db;
+  } catch (error: any) {
+    log(`Database connection attempt ${retryCount + 1} failed: ${error?.message || 'Unknown error'}`);
+    
+    if (retryCount < MAX_RETRIES) {
+      log(`Retrying in ${RETRY_DELAY / 1000} seconds...`);
+      await new Promise(resolve => setTimeout(resolve, RETRY_DELAY));
+      return createDbConnection(retryCount + 1);
+    }
+    
+    throw new Error(`Failed to connect to database after ${MAX_RETRIES} attempts`);
   }
-});
+}
 
-export const db = drizzle(pool);
+export const initDb = async () => {
+  try {
+    const db = await createDbConnection();
+    return db;
+  } catch (error: any) {
+    log(`Fatal database error: ${error?.message || 'Unknown error'}`);
+    throw error;
+  }
+};

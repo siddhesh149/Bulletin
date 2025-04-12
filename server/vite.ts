@@ -28,7 +28,7 @@ export async function setupVite(app: Express, server: Server) {
   const serverOptions = {
     middlewareMode: true,
     hmr: { server },
-    allowedHosts: "all",
+    allowedHosts: true,
   };
 
   const vite = await createViteServer({
@@ -73,18 +73,30 @@ export async function setupVite(app: Express, server: Server) {
 }
 
 export function serveStatic(app: Express) {
-  const distPath = path.resolve(__dirname, "..", "dist");
+  const distPath = path.resolve(__dirname, "..", "dist", "public");
+  const indexPath = path.join(distPath, "index.html");
+
+  // Log the paths being used
+  log(`Serving static files from: ${distPath}`);
+  log(`Index file path: ${indexPath}`);
 
   if (!fs.existsSync(distPath)) {
+    log(`Build directory not found at: ${distPath}`);
     throw new Error(
       `Could not find the build directory: ${distPath}, make sure to build the client first`,
     );
   }
 
+  // Serve static files from the dist/public directory
   app.use(express.static(distPath));
 
-  // fall through to index.html if the file doesn't exist
+  // For any other routes, serve index.html
   app.use("*", (_req, res) => {
-    res.sendFile(path.resolve(distPath, "index.html"));
+    if (fs.existsSync(indexPath)) {
+      res.sendFile(indexPath);
+    } else {
+      log(`Index file not found at: ${indexPath}`);
+      res.status(404).send("Application not built properly. Missing index.html");
+    }
   });
 }
