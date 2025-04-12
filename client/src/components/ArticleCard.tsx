@@ -76,8 +76,8 @@ const ArticleCard: React.FC<ArticleCardProps> = ({
           <div className="p-4">
             <h3 className="text-lg font-headline font-bold mt-2 mb-2">{title}</h3>
             {summary && <p className="text-sm text-neutral-600 mb-2">{summary}</p>}
-            <div className="flex items-center text-sm text-neutral-600">
-              <span className="mr-3">
+            <div className="flex flex-col gap-2 text-sm text-neutral-600">
+              <span>
                 <i className="far fa-clock mr-1"></i> <TimeAgo timestamp={createdAt} />
               </span>
               <ViewCounter count={viewCount} />
