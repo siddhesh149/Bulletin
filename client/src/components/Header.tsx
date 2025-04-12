@@ -84,63 +84,63 @@ const Header: React.FC = () => {
           <ul className="flex space-x-1">
             <li>
               <Link href="/">
-                <a className={`px-3 py-2 block hover:bg-blue-900 transition ${location === '/' ? 'bg-blue-900' : ''}`}>
+                <a className={`px-3 py-2 block hover:bg-blue-900 text-white transition ${location === '/' ? 'bg-blue-900' : ''}`}>
                   Home
                 </a>
               </Link>
             </li>
             <li>
               <Link href="/category/politics">
-                <a className={`px-3 py-2 block hover:bg-blue-900 transition ${location === '/category/politics' ? 'bg-blue-900' : ''}`}>
+                <a className={`px-3 py-2 block hover:bg-blue-900 text-white transition ${location === '/category/politics' ? 'bg-blue-900' : ''}`}>
                   Politics
                 </a>
               </Link>
             </li>
             <li>
               <Link href="/category/business">
-                <a className={`px-3 py-2 block hover:bg-blue-900 transition ${location === '/category/business' ? 'bg-blue-900' : ''}`}>
+                <a className={`px-3 py-2 block hover:bg-blue-900 text-white transition ${location === '/category/business' ? 'bg-blue-900' : ''}`}>
                   Business
                 </a>
               </Link>
             </li>
             <li>
               <Link href="/category/technology">
-                <a className={`px-3 py-2 block hover:bg-blue-900 transition ${location === '/category/technology' ? 'bg-blue-900' : ''}`}>
+                <a className={`px-3 py-2 block hover:bg-blue-900 text-white transition ${location === '/category/technology' ? 'bg-blue-900' : ''}`}>
                   Technology
                 </a>
               </Link>
             </li>
             <li>
               <Link href="/category/sports">
-                <a className={`px-3 py-2 block hover:bg-blue-900 transition ${location === '/category/sports' ? 'bg-blue-900' : ''}`}>
+                <a className={`px-3 py-2 block hover:bg-blue-900 text-white transition ${location === '/category/sports' ? 'bg-blue-900' : ''}`}>
                   Sports
                 </a>
               </Link>
             </li>
             <li>
               <Link href="/category/entertainment">
-                <a className={`px-3 py-2 block hover:bg-blue-900 transition ${location === '/category/entertainment' ? 'bg-blue-900' : ''}`}>
+                <a className={`px-3 py-2 block hover:bg-blue-900 text-white transition ${location === '/category/entertainment' ? 'bg-blue-900' : ''}`}>
                   Entertainment
                 </a>
               </Link>
             </li>
             <li>
               <Link href="/category/health">
-                <a className={`px-3 py-2 block hover:bg-blue-900 transition ${location === '/category/health' ? 'bg-blue-900' : ''}`}>
+                <a className={`px-3 py-2 block hover:bg-blue-900 text-white transition ${location === '/category/health' ? 'bg-blue-900' : ''}`}>
                   Health
                 </a>
               </Link>
             </li>
             <li>
               <Link href="/category/science">
-                <a className={`px-3 py-2 block hover:bg-blue-900 transition ${location === '/category/science' ? 'bg-blue-900' : ''}`}>
+                <a className={`px-3 py-2 block hover:bg-blue-900 text-white transition ${location === '/category/science' ? 'bg-blue-900' : ''}`}>
                   Science
                 </a>
               </Link>
             </li>
             <li>
               <Link href="/category/world">
-                <a className={`px-3 py-2 block hover:bg-blue-900 transition ${location === '/category/world' ? 'bg-blue-900' : ''}`}>
+                <a className={`px-3 py-2 block hover:bg-blue-900 text-white transition ${location === '/category/world' ? 'bg-blue-900' : ''}`}>
                   World
                 </a>
               </Link>
