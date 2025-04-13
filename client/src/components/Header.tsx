@@ -85,21 +85,24 @@ const Header: React.FC = () => {
             </a>
           </Link>
         </div>
-        <div className="lg:hidden">
-          <button
-            className="p-2 hover:bg-gray-100 rounded-md transition-colors"
-            onClick={toggleMobileMenu}
-            aria-label="Menu"
-          >
-            <i className="fas fa-bars text-xl"></i>
-          </button>
+        <div className="flex items-center">
+          <div className="block lg:hidden">
+            <button
+              className="inline-flex items-center justify-center p-3 hover:bg-gray-100 rounded-md transition-colors text-gray-800"
+              onClick={toggleMobileMenu}
+              aria-label="Menu"
+            >
+              <i className="fas fa-bars text-xl"></i>
+              <span className="ml-2 text-sm font-medium">Menu</span>
+            </button>
+          </div>
         </div>
       </div>
       
       {/* Navigation */}
-      <nav className="bg-primary text-white">
+      <nav className="bg-primary w-full">
         <div className="container mx-auto px-4">
-          <ul className="hidden lg:flex space-x-1">
+          <ul className="hidden lg:flex lg:visible space-x-1">
             <li>
               <Link href="/">
                 <a className={`px-4 py-3 inline-block hover:bg-blue-900 text-white transition-colors ${location === '/' ? 'bg-blue-900' : ''}`}>
@@ -174,7 +177,7 @@ const Header: React.FC = () => {
             <div className="flex justify-between items-center mb-6 border-b pb-4">
               <h2 className="text-2xl font-bold text-primary" style={{ fontFamily: 'Times New Roman, serif' }}>Menu</h2>
               <button
-                className="p-2 hover:bg-gray-100 rounded-md transition-colors"
+                className="p-2 hover:bg-gray-100 rounded-md transition-colors text-gray-800"
                 onClick={toggleMobileMenu}
                 aria-label="Close menu"
               >
