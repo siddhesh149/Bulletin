@@ -71,7 +71,7 @@ const Header: React.FC = () => {
           <Link href="/">
             <a className="flex items-center gap-4">
               <img 
-                src="/LNM.svg" 
+                src="/assets/LNM.svg" 
                 alt="LNM" 
                 className="h-14 w-auto" 
                 style={{ 
@@ -93,7 +93,13 @@ const Header: React.FC = () => {
             </a>
           </Link>
         </div>
-        <div className="flex items-center">
+        <div className="flex items-center space-x-4">
+          <Link href="/contact">
+            <a className="hidden md:flex items-center text-gray-600 hover:text-primary transition-colors">
+              <i className="fas fa-envelope mr-2"></i>
+              Contact Us
+            </a>
+          </Link>
           <div className="mobile-menu-button">
             <button
               className="inline-flex items-center justify-center p-3 hover:bg-gray-100 rounded-md transition-colors text-gray-800"
