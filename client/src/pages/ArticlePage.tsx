@@ -7,6 +7,7 @@ import TimeAgo from '@/components/TimeAgo';
 import ViewCounter from '@/components/ViewCounter';
 import ArticleCard from '@/components/ArticleCard';
 import { Separator } from '@/components/ui/separator';
+import { getQueryFn } from '@/lib/queryClient';
 
 type Article = {
   id: number;
@@ -37,6 +38,7 @@ const ArticlePage: React.FC = () => {
 
   const { data, isLoading, error } = useQuery<ArticleResponse>({
     queryKey: [`/api/articles/${slug}`, slug],
+    queryFn: getQueryFn<ArticleResponse>({ on401: "throw" }),
     enabled: !!slug,
   });
 
@@ -188,11 +190,12 @@ const ArticlePage: React.FC = () => {
                       id={related.id}
                       title={related.title}
                       slug={related.slug}
+                      summary={related.summary}
                       imageUrl={related.imageUrl}
                       category={related.category}
                       viewCount={related.viewCount}
                       createdAt={related.createdAt}
-                      compact={true}
+                      size="small"
                     />
                   </li>
                 ))}
