@@ -35,12 +35,12 @@ const CategoryPage: React.FC = () => {
   useEffect(() => {
     if (category) {
       const categoryName = category.charAt(0).toUpperCase() + category.slice(1);
-      document.title = `${categoryName} | News Media`;
+      document.title = `${categoryName} | Latest News Media`;
     }
     
     // Reset title on unmount
     return () => {
-      document.title = 'News Media - Latest News, Breaking News, Today\'s Headlines';
+      document.title = 'Latest News Media - Latest News, Breaking News, Today\'s Headlines';
     };
   }, [category]);
 

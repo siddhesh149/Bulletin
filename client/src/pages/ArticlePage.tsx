@@ -45,12 +45,12 @@ const ArticlePage: React.FC = () => {
   // Set title when article loads
   useEffect(() => {
     if (data?.article) {
-      document.title = `${data.article.title} | News Media`;
+      document.title = `${data.article.title} | Latest News Media`;
     }
     
     // Reset title on unmount
     return () => {
-      document.title = 'News Media - Latest News, Breaking News, Today\'s Headlines';
+      document.title = 'Latest News Media - Latest News, Breaking News, Today\'s Headlines';
     };
   }, [data?.article]);
 

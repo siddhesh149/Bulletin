@@ -62,8 +62,11 @@ const Header: React.FC = () => {
       <div className="container mx-auto px-4 py-3 flex justify-between items-center">
         <div className="flex items-center">
           <Link href="/">
-            <a className="text-3xl md:text-4xl font-bold font-times text-primary">
-              News Media
+            <a className="flex items-center">
+              <img src="/LNM.svg" alt="Latest News Media Logo" className="h-12 mr-3" />
+              <span className="text-3xl md:text-4xl font-bold font-times text-primary">
+                Latest News Media
+              </span>
             </a>
           </Link>
         </div>
@@ -79,7 +82,7 @@ const Header: React.FC = () => {
       </div>
       
       {/* Navigation */}
-      <nav className="bg-primary text-white hidden lg:block">
+      <nav className="bg-primary text-white block">
         <div className="container mx-auto px-4">
           <ul className="flex space-x-1">
             <li>
