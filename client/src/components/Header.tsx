@@ -63,8 +63,23 @@ const Header: React.FC = () => {
         <div className="flex items-center">
           <Link href="/">
             <a className="flex items-center gap-4">
-              <img src="/LNM.svg" alt="LNM" className="h-16 w-auto" />
-              <span className="text-3xl md:text-4xl font-bold font-['Times_New_Roman'] text-primary">
+              <img 
+                src="/LNM.svg" 
+                alt="LNM" 
+                className="h-14 w-auto transition-transform hover:scale-105" 
+                style={{ 
+                  filter: 'drop-shadow(2px 2px 4px rgba(0,0,0,0.1))',
+                  maxWidth: '100%',
+                  height: 'auto'
+                }} 
+              />
+              <span 
+                className="text-3xl md:text-4xl font-bold text-primary transition-colors" 
+                style={{ 
+                  fontFamily: 'Times New Roman, serif',
+                  letterSpacing: '-0.02em'
+                }}
+              >
                 Latest News Media
               </span>
             </a>
@@ -72,7 +87,7 @@ const Header: React.FC = () => {
         </div>
         <div className="lg:hidden">
           <button
-            className="p-2"
+            className="p-2 hover:bg-gray-100 rounded-md transition-colors"
             onClick={toggleMobileMenu}
             aria-label="Menu"
           >
@@ -82,156 +97,154 @@ const Header: React.FC = () => {
       </div>
       
       {/* Navigation */}
-      <nav className="bg-primary text-white block">
+      <nav className="bg-primary text-white">
         <div className="container mx-auto px-4">
-          <ul className="flex space-x-1">
+          <ul className="hidden lg:flex space-x-1">
             <li>
               <Link href="/">
-                <a className={`px-3 py-2 block hover:bg-blue-900 text-white transition ${location === '/' ? 'bg-blue-900' : ''}`}>
+                <a className={`px-4 py-3 inline-block hover:bg-blue-900 text-white transition-colors ${location === '/' ? 'bg-blue-900' : ''}`}>
                   Home
                 </a>
               </Link>
             </li>
             <li>
               <Link href="/category/politics">
-                <a className={`px-3 py-2 block hover:bg-blue-900 text-white transition ${location === '/category/politics' ? 'bg-blue-900' : ''}`}>
+                <a className={`px-4 py-3 inline-block hover:bg-blue-900 text-white transition-colors ${location === '/category/politics' ? 'bg-blue-900' : ''}`}>
                   Politics
                 </a>
               </Link>
             </li>
             <li>
               <Link href="/category/business">
-                <a className={`px-3 py-2 block hover:bg-blue-900 text-white transition ${location === '/category/business' ? 'bg-blue-900' : ''}`}>
+                <a className={`px-4 py-3 inline-block hover:bg-blue-900 text-white transition-colors ${location === '/category/business' ? 'bg-blue-900' : ''}`}>
                   Business
                 </a>
               </Link>
             </li>
             <li>
               <Link href="/category/technology">
-                <a className={`px-3 py-2 block hover:bg-blue-900 text-white transition ${location === '/category/technology' ? 'bg-blue-900' : ''}`}>
+                <a className={`px-4 py-3 inline-block hover:bg-blue-900 text-white transition-colors ${location === '/category/technology' ? 'bg-blue-900' : ''}`}>
                   Technology
                 </a>
               </Link>
             </li>
             <li>
               <Link href="/category/sports">
-                <a className={`px-3 py-2 block hover:bg-blue-900 text-white transition ${location === '/category/sports' ? 'bg-blue-900' : ''}`}>
+                <a className={`px-4 py-3 inline-block hover:bg-blue-900 text-white transition-colors ${location === '/category/sports' ? 'bg-blue-900' : ''}`}>
                   Sports
                 </a>
               </Link>
             </li>
             <li>
               <Link href="/category/entertainment">
-                <a className={`px-3 py-2 block hover:bg-blue-900 text-white transition ${location === '/category/entertainment' ? 'bg-blue-900' : ''}`}>
+                <a className={`px-4 py-3 inline-block hover:bg-blue-900 text-white transition-colors ${location === '/category/entertainment' ? 'bg-blue-900' : ''}`}>
                   Entertainment
                 </a>
               </Link>
             </li>
             <li>
               <Link href="/category/health">
-                <a className={`px-3 py-2 block hover:bg-blue-900 text-white transition ${location === '/category/health' ? 'bg-blue-900' : ''}`}>
+                <a className={`px-4 py-3 inline-block hover:bg-blue-900 text-white transition-colors ${location === '/category/health' ? 'bg-blue-900' : ''}`}>
                   Health
                 </a>
               </Link>
             </li>
             <li>
               <Link href="/category/science">
-                <a className={`px-3 py-2 block hover:bg-blue-900 text-white transition ${location === '/category/science' ? 'bg-blue-900' : ''}`}>
+                <a className={`px-4 py-3 inline-block hover:bg-blue-900 text-white transition-colors ${location === '/category/science' ? 'bg-blue-900' : ''}`}>
                   Science
                 </a>
               </Link>
             </li>
             <li>
               <Link href="/category/world">
-                <a className={`px-3 py-2 block hover:bg-blue-900 text-white transition ${location === '/category/world' ? 'bg-blue-900' : ''}`}>
+                <a className={`px-4 py-3 inline-block hover:bg-blue-900 text-white transition-colors ${location === '/category/world' ? 'bg-blue-900' : ''}`}>
                   World
                 </a>
               </Link>
             </li>
-
           </ul>
         </div>
       </nav>
       
       {/* Mobile menu */}
       {mobileMenuOpen && (
-        <div className="fixed inset-0 bg-white z-50 lg:hidden">
+        <div className="fixed inset-0 bg-white z-50 lg:hidden overflow-y-auto">
           <div className="container mx-auto px-4 py-4">
-            <div className="flex justify-between items-center mb-4">
-              <h2 className="text-2xl font-times text-primary">Menu</h2>
+            <div className="flex justify-between items-center mb-6 border-b pb-4">
+              <h2 className="text-2xl font-bold text-primary" style={{ fontFamily: 'Times New Roman, serif' }}>Menu</h2>
               <button
-                className="p-2"
+                className="p-2 hover:bg-gray-100 rounded-md transition-colors"
                 onClick={toggleMobileMenu}
                 aria-label="Close menu"
               >
                 <i className="fas fa-times text-xl"></i>
               </button>
             </div>
-            <ul className="space-y-3">
+            <ul className="space-y-0">
               <li>
                 <Link href="/">
-                  <a className="block py-2 border-b" onClick={() => setMobileMenuOpen(false)}>
+                  <a className={`block py-3 px-4 hover:bg-gray-100 transition-colors ${location === '/' ? 'bg-gray-100 text-primary' : ''}`} onClick={() => setMobileMenuOpen(false)}>
                     Home
                   </a>
                 </Link>
               </li>
               <li>
                 <Link href="/category/politics">
-                  <a className="block py-2 border-b" onClick={() => setMobileMenuOpen(false)}>
+                  <a className={`block py-3 px-4 hover:bg-gray-100 transition-colors ${location === '/category/politics' ? 'bg-gray-100 text-primary' : ''}`} onClick={() => setMobileMenuOpen(false)}>
                     Politics
                   </a>
                 </Link>
               </li>
               <li>
                 <Link href="/category/business">
-                  <a className="block py-2 border-b" onClick={() => setMobileMenuOpen(false)}>
+                  <a className={`block py-3 px-4 hover:bg-gray-100 transition-colors ${location === '/category/business' ? 'bg-gray-100 text-primary' : ''}`} onClick={() => setMobileMenuOpen(false)}>
                     Business
                   </a>
                 </Link>
               </li>
               <li>
                 <Link href="/category/technology">
-                  <a className="block py-2 border-b" onClick={() => setMobileMenuOpen(false)}>
+                  <a className={`block py-3 px-4 hover:bg-gray-100 transition-colors ${location === '/category/technology' ? 'bg-gray-100 text-primary' : ''}`} onClick={() => setMobileMenuOpen(false)}>
                     Technology
                   </a>
                 </Link>
               </li>
               <li>
                 <Link href="/category/sports">
-                  <a className="block py-2 border-b" onClick={() => setMobileMenuOpen(false)}>
+                  <a className={`block py-3 px-4 hover:bg-gray-100 transition-colors ${location === '/category/sports' ? 'bg-gray-100 text-primary' : ''}`} onClick={() => setMobileMenuOpen(false)}>
                     Sports
                   </a>
                 </Link>
               </li>
               <li>
                 <Link href="/category/entertainment">
-                  <a className="block py-2 border-b" onClick={() => setMobileMenuOpen(false)}>
+                  <a className={`block py-3 px-4 hover:bg-gray-100 transition-colors ${location === '/category/entertainment' ? 'bg-gray-100 text-primary' : ''}`} onClick={() => setMobileMenuOpen(false)}>
                     Entertainment
                   </a>
                 </Link>
               </li>
               <li>
                 <Link href="/category/health">
-                  <a className="block py-2 border-b" onClick={() => setMobileMenuOpen(false)}>
+                  <a className={`block py-3 px-4 hover:bg-gray-100 transition-colors ${location === '/category/health' ? 'bg-gray-100 text-primary' : ''}`} onClick={() => setMobileMenuOpen(false)}>
                     Health
                   </a>
                 </Link>
               </li>
               <li>
                 <Link href="/category/science">
-                  <a className="block py-2 border-b" onClick={() => setMobileMenuOpen(false)}>
+                  <a className={`block py-3 px-4 hover:bg-gray-100 transition-colors ${location === '/category/science' ? 'bg-gray-100 text-primary' : ''}`} onClick={() => setMobileMenuOpen(false)}>
                     Science
                   </a>
                 </Link>
               </li>
               <li>
                 <Link href="/category/world">
-                  <a className="block py-2 border-b" onClick={() => setMobileMenuOpen(false)}>
+                  <a className={`block py-3 px-4 hover:bg-gray-100 transition-colors ${location === '/category/world' ? 'bg-gray-100 text-primary' : ''}`} onClick={() => setMobileMenuOpen(false)}>
                     World
                   </a>
                 </Link>
               </li>
-
             </ul>
           </div>
         </div>
