@@ -32,7 +32,8 @@ async function seed() {
         content: 'Full article content here...',
         imageUrl: 'https://images.pexels.com/photos/1714208/pexels-photo-1714208.jpeg',
         category: 'technology',
-        tags: JSON.stringify(['AI', 'journalism', 'technology', 'media']),
+        authorName: 'John Doe',
+        authorImageUrl: 'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg',
         featuredOrder: 1
       },
       {
@@ -42,7 +43,8 @@ async function seed() {
         content: 'Full article content here...',
         imageUrl: 'https://images.pexels.com/photos/187041/pexels-photo-187041.jpeg',
         category: 'business',
-        tags: JSON.stringify(['economics', 'markets', 'finance', 'trends']),
+        authorName: 'Jane Smith',
+        authorImageUrl: 'https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg',
         featuredOrder: 2
       },
       {
@@ -52,7 +54,8 @@ async function seed() {
         content: 'Full article content here...',
         imageUrl: 'https://images.pexels.com/photos/325229/pexels-photo-325229.jpeg',
         category: 'science',
-        tags: JSON.stringify(['quantum computing', 'research', 'technology', 'science'])
+        authorName: 'Dr. Sarah Johnson',
+        authorImageUrl: 'https://images.pexels.com/photos/1181686/pexels-photo-1181686.jpeg'
       }
     ]);
     console.log('[express] Created sample articles');
