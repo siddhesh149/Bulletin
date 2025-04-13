@@ -1,21 +1,40 @@
-.nav-menu {
-  display: none;
+/* Desktop Navigation */
+.desktop-nav {
+  display: none; /* Hidden by default on mobile */
 }
 
-@media (min-width: 768px) {
-  .nav-menu {
-    display: flex !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-  }
+.nav-link {
+  padding: 0.75rem 1rem;
+  display: inline-block;
+  color: white;
+  transition: background-color 0.2s;
 }
 
+.nav-link:hover {
+  background-color: #1e3a8a; /* dark blue */
+}
+
+.nav-link.active {
+  background-color: #1e3a8a;
+}
+
+/* Mobile Menu Button */
 .mobile-menu-button {
   display: block;
 }
 
+/* Media Queries */
 @media (min-width: 768px) {
+  .desktop-nav {
+    display: flex;
+    gap: 0.25rem;
+  }
+
   .mobile-menu-button {
+    display: none;
+  }
+
+  .mobile-menu {
     display: none !important;
   }
 }

@@ -103,66 +103,66 @@ const Header: React.FC = () => {
       {/* Navigation */}
       <nav className="bg-primary w-full">
         <div className="container mx-auto px-4">
-          <ul className="hidden md:flex space-x-1" style={{ display: 'flex' }}>
+          <ul className="desktop-nav">
             <li>
               <Link href="/">
-                <a className={`px-4 py-3 inline-block hover:bg-blue-900 text-white transition-colors ${location === '/' ? 'bg-blue-900' : ''}`}>
+                <a className={`nav-link ${location === '/' ? 'active' : ''}`}>
                   Home
                 </a>
               </Link>
             </li>
             <li>
               <Link href="/category/politics">
-                <a className={`px-4 py-3 inline-block hover:bg-blue-900 text-white transition-colors ${location === '/category/politics' ? 'bg-blue-900' : ''}`}>
+                <a className={`nav-link ${location === '/category/politics' ? 'active' : ''}`}>
                   Politics
                 </a>
               </Link>
             </li>
             <li>
               <Link href="/category/business">
-                <a className={`px-4 py-3 inline-block hover:bg-blue-900 text-white transition-colors ${location === '/category/business' ? 'bg-blue-900' : ''}`}>
+                <a className={`nav-link ${location === '/category/business' ? 'active' : ''}`}>
                   Business
                 </a>
               </Link>
             </li>
             <li>
               <Link href="/category/technology">
-                <a className={`px-4 py-3 inline-block hover:bg-blue-900 text-white transition-colors ${location === '/category/technology' ? 'bg-blue-900' : ''}`}>
+                <a className={`nav-link ${location === '/category/technology' ? 'active' : ''}`}>
                   Technology
                 </a>
               </Link>
             </li>
             <li>
               <Link href="/category/sports">
-                <a className={`px-4 py-3 inline-block hover:bg-blue-900 text-white transition-colors ${location === '/category/sports' ? 'bg-blue-900' : ''}`}>
+                <a className={`nav-link ${location === '/category/sports' ? 'active' : ''}`}>
                   Sports
                 </a>
               </Link>
             </li>
             <li>
               <Link href="/category/entertainment">
-                <a className={`px-4 py-3 inline-block hover:bg-blue-900 text-white transition-colors ${location === '/category/entertainment' ? 'bg-blue-900' : ''}`}>
+                <a className={`nav-link ${location === '/category/entertainment' ? 'active' : ''}`}>
                   Entertainment
                 </a>
               </Link>
             </li>
             <li>
               <Link href="/category/health">
-                <a className={`px-4 py-3 inline-block hover:bg-blue-900 text-white transition-colors ${location === '/category/health' ? 'bg-blue-900' : ''}`}>
+                <a className={`nav-link ${location === '/category/health' ? 'active' : ''}`}>
                   Health
                 </a>
               </Link>
             </li>
             <li>
               <Link href="/category/science">
-                <a className={`px-4 py-3 inline-block hover:bg-blue-900 text-white transition-colors ${location === '/category/science' ? 'bg-blue-900' : ''}`}>
+                <a className={`nav-link ${location === '/category/science' ? 'active' : ''}`}>
                   Science
                 </a>
               </Link>
             </li>
             <li>
               <Link href="/category/world">
-                <a className={`px-4 py-3 inline-block hover:bg-blue-900 text-white transition-colors ${location === '/category/world' ? 'bg-blue-900' : ''}`}>
+                <a className={`nav-link ${location === '/category/world' ? 'active' : ''}`}>
                   World
                 </a>
               </Link>
