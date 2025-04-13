@@ -70,22 +70,12 @@ const Header: React.FC = () => {
         <div className="flex items-center">
           <Link href="/">
             <a className="flex items-center gap-4">
-              <img 
-                src="/assets/LNM.svg" 
-                alt="LNM" 
-                className="h-14 w-auto" 
-                style={{ 
-                  filter: 'drop-shadow(2px 2px 4px rgba(0,0,0,0.1))',
-                  width: '56px',
-                  height: '56px',
-                  objectFit: 'contain'
-                }} 
-              />
               <span 
-                className="text-3xl md:text-4xl font-bold text-primary" 
+                className="text-3xl md:text-4xl font-bold" 
                 style={{ 
                   fontFamily: 'Times New Roman, serif',
-                  letterSpacing: '-0.02em'
+                  letterSpacing: '-0.02em',
+                  color: '#1e3a8a'
                 }}
               >
                 Latest News Media
@@ -93,13 +83,7 @@ const Header: React.FC = () => {
             </a>
           </Link>
         </div>
-        <div className="flex items-center space-x-4">
-          <Link href="/contact">
-            <a className="hidden md:flex items-center text-gray-600 hover:text-primary transition-colors">
-              <i className="fas fa-envelope mr-2"></i>
-              Contact Us
-            </a>
-          </Link>
+        <div className="flex items-center">
           <div className="mobile-menu-button">
             <button
               className="inline-flex items-center justify-center p-3 hover:bg-gray-100 rounded-md transition-colors text-gray-800"
