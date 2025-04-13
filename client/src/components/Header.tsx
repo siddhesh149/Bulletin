@@ -24,9 +24,15 @@ const Header: React.FC = () => {
 
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // In a real app, this would navigate to search results
-    console.log('Search for:', searchQuery);
+    if (searchQuery.trim()) {
+      window.location.href = `/search?q=${encodeURIComponent(searchQuery.trim())}`;
+    }
     setSearchOpen(false);
+  };
+
+  const handleCategoryClick = (category: string) => {
+    setMobileMenuOpen(false);
+    // The actual navigation will be handled by the Link component
   };
 
   const toggleMobileMenu = () => {
@@ -106,76 +112,37 @@ const Header: React.FC = () => {
           <ul className="desktop-nav">
             <li>
               <Link href="/">
-                <a className={`nav-link ${location === '/' ? 'active' : ''}`}>
-                  <i className="fas fa-home mr-2"></i>
+                <a 
+                  className={`nav-link ${location === '/' ? 'active' : ''}`}
+                  onClick={() => handleCategoryClick('home')}
+                >
+                  <i className="fas fa-home"></i>
                   Home
                 </a>
               </Link>
             </li>
-            <li>
-              <Link href="/category/politics">
-                <a className={`nav-link ${location === '/category/politics' ? 'active' : ''}`}>
-                  <i className="fas fa-landmark mr-2"></i>
-                  Politics
-                </a>
-              </Link>
-            </li>
-            <li>
-              <Link href="/category/business">
-                <a className={`nav-link ${location === '/category/business' ? 'active' : ''}`}>
-                  <i className="fas fa-chart-line mr-2"></i>
-                  Business
-                </a>
-              </Link>
-            </li>
-            <li>
-              <Link href="/category/technology">
-                <a className={`nav-link ${location === '/category/technology' ? 'active' : ''}`}>
-                  <i className="fas fa-microchip mr-2"></i>
-                  Technology
-                </a>
-              </Link>
-            </li>
-            <li>
-              <Link href="/category/sports">
-                <a className={`nav-link ${location === '/category/sports' ? 'active' : ''}`}>
-                  <i className="fas fa-football-ball mr-2"></i>
-                  Sports
-                </a>
-              </Link>
-            </li>
-            <li>
-              <Link href="/category/entertainment">
-                <a className={`nav-link ${location === '/category/entertainment' ? 'active' : ''}`}>
-                  <i className="fas fa-film mr-2"></i>
-                  Entertainment
-                </a>
-              </Link>
-            </li>
-            <li>
-              <Link href="/category/health">
-                <a className={`nav-link ${location === '/category/health' ? 'active' : ''}`}>
-                  <i className="fas fa-heartbeat mr-2"></i>
-                  Health
-                </a>
-              </Link>
-            </li>
-            <li>
-              <Link href="/category/science">
-                <a className={`nav-link ${location === '/category/science' ? 'active' : ''}`}>
-                  <i className="fas fa-flask mr-2"></i>
-                  Science
-                </a>
-              </Link>
-            </li>
-            <li>
-              <Link href="/category/world">
-                <a className={`nav-link ${location === '/category/world' ? 'active' : ''}`}>
-                  <i className="fas fa-globe mr-2"></i>
-                  World
-                </a>
-              </Link>
-            </li>
+            {[
+              { path: 'politics', icon: 'landmark', label: 'Politics' },
+              { path: 'business', icon: 'chart-line', label: 'Business' },
+              { path: 'technology', icon: 'microchip', label: 'Technology' },
+              { path: 'sports', icon: 'football-ball', label: 'Sports' },
+              { path: 'entertainment', icon: 'film', label: 'Entertainment' },
+              { path: 'health', icon: 'heartbeat', label: 'Health' },
+              { path: 'science', icon: 'flask', label: 'Science' },
+              { path: 'world', icon: 'globe', label: 'World' }
+            ].map(({ path, icon, label }) => (
+              <li key={path}>
+                <Link href={`/category/${path}`}>
+                  <a 
+                    className={`nav-link ${location === `/category/${path}` ? 'active' : ''}`}
+                    onClick={() => handleCategoryClick(path)}
+                  >
+                    <i className={`fas fa-${icon}`}></i>
+                    {label}
+                  </a>
+                </Link>
+              </li>
+            ))}
           </ul>
         </div>
       </nav>
@@ -188,7 +155,7 @@ const Header: React.FC = () => {
               <h2 className="text-2xl font-bold text-primary" style={{ fontFamily: 'Times New Roman, serif' }}>Menu</h2>
               <button
                 className="p-2 hover:bg-gray-100 rounded-md transition-colors text-gray-800"
-                onClick={toggleMobileMenu}
+                onClick={() => setMobileMenuOpen(false)}
                 aria-label="Close menu"
               >
                 <i className="fas fa-times text-xl"></i>
@@ -197,67 +164,39 @@ const Header: React.FC = () => {
             <ul className="space-y-0">
               <li>
                 <Link href="/">
-                  <a className={`block py-3 px-4 hover:bg-gray-100 transition-colors ${location === '/' ? 'bg-gray-100 text-primary' : ''}`} onClick={() => setMobileMenuOpen(false)}>
+                  <a 
+                    className={`block py-3 px-4 hover:bg-gray-100 transition-colors ${location === '/' ? 'bg-gray-100 text-primary' : ''}`}
+                    onClick={() => handleCategoryClick('home')}
+                  >
+                    <i className="fas fa-home mr-2"></i>
                     Home
                   </a>
                 </Link>
               </li>
-              <li>
-                <Link href="/category/politics">
-                  <a className={`block py-3 px-4 hover:bg-gray-100 transition-colors ${location === '/category/politics' ? 'bg-gray-100 text-primary' : ''}`} onClick={() => setMobileMenuOpen(false)}>
-                    Politics
-                  </a>
-                </Link>
-              </li>
-              <li>
-                <Link href="/category/business">
-                  <a className={`block py-3 px-4 hover:bg-gray-100 transition-colors ${location === '/category/business' ? 'bg-gray-100 text-primary' : ''}`} onClick={() => setMobileMenuOpen(false)}>
-                    Business
-                  </a>
-                </Link>
-              </li>
-              <li>
-                <Link href="/category/technology">
-                  <a className={`block py-3 px-4 hover:bg-gray-100 transition-colors ${location === '/category/technology' ? 'bg-gray-100 text-primary' : ''}`} onClick={() => setMobileMenuOpen(false)}>
-                    Technology
-                  </a>
-                </Link>
-              </li>
-              <li>
-                <Link href="/category/sports">
-                  <a className={`block py-3 px-4 hover:bg-gray-100 transition-colors ${location === '/category/sports' ? 'bg-gray-100 text-primary' : ''}`} onClick={() => setMobileMenuOpen(false)}>
-                    Sports
-                  </a>
-                </Link>
-              </li>
-              <li>
-                <Link href="/category/entertainment">
-                  <a className={`block py-3 px-4 hover:bg-gray-100 transition-colors ${location === '/category/entertainment' ? 'bg-gray-100 text-primary' : ''}`} onClick={() => setMobileMenuOpen(false)}>
-                    Entertainment
-                  </a>
-                </Link>
-              </li>
-              <li>
-                <Link href="/category/health">
-                  <a className={`block py-3 px-4 hover:bg-gray-100 transition-colors ${location === '/category/health' ? 'bg-gray-100 text-primary' : ''}`} onClick={() => setMobileMenuOpen(false)}>
-                    Health
-                  </a>
-                </Link>
-              </li>
-              <li>
-                <Link href="/category/science">
-                  <a className={`block py-3 px-4 hover:bg-gray-100 transition-colors ${location === '/category/science' ? 'bg-gray-100 text-primary' : ''}`} onClick={() => setMobileMenuOpen(false)}>
-                    Science
-                  </a>
-                </Link>
-              </li>
-              <li>
-                <Link href="/category/world">
-                  <a className={`block py-3 px-4 hover:bg-gray-100 transition-colors ${location === '/category/world' ? 'bg-gray-100 text-primary' : ''}`} onClick={() => setMobileMenuOpen(false)}>
-                    World
-                  </a>
-                </Link>
-              </li>
+              {[
+                { path: 'politics', icon: 'landmark', label: 'Politics' },
+                { path: 'business', icon: 'chart-line', label: 'Business' },
+                { path: 'technology', icon: 'microchip', label: 'Technology' },
+                { path: 'sports', icon: 'football-ball', label: 'Sports' },
+                { path: 'entertainment', icon: 'film', label: 'Entertainment' },
+                { path: 'health', icon: 'heartbeat', label: 'Health' },
+                { path: 'science', icon: 'flask', label: 'Science' },
+                { path: 'world', icon: 'globe', label: 'World' }
+              ].map(({ path, icon, label }) => (
+                <li key={path}>
+                  <Link href={`/category/${path}`}>
+                    <a 
+                      className={`block py-3 px-4 hover:bg-gray-100 transition-colors ${
+                        location === `/category/${path}` ? 'bg-gray-100 text-primary' : ''
+                      }`}
+                      onClick={() => handleCategoryClick(path)}
+                    >
+                      <i className={`fas fa-${icon} mr-2`}></i>
+                      {label}
+                    </a>
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
