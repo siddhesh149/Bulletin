@@ -101,12 +101,13 @@ const Header: React.FC = () => {
       </div>
       
       {/* Navigation */}
-      <nav className="bg-primary w-full">
-        <div className="container mx-auto px-4">
+      <nav className="w-full py-2 px-4">
+        <div className="container mx-auto">
           <ul className="desktop-nav">
             <li>
               <Link href="/">
                 <a className={`nav-link ${location === '/' ? 'active' : ''}`}>
+                  <i className="fas fa-home mr-2"></i>
                   Home
                 </a>
               </Link>
@@ -114,6 +115,7 @@ const Header: React.FC = () => {
             <li>
               <Link href="/category/politics">
                 <a className={`nav-link ${location === '/category/politics' ? 'active' : ''}`}>
+                  <i className="fas fa-landmark mr-2"></i>
                   Politics
                 </a>
               </Link>
@@ -121,6 +123,7 @@ const Header: React.FC = () => {
             <li>
               <Link href="/category/business">
                 <a className={`nav-link ${location === '/category/business' ? 'active' : ''}`}>
+                  <i className="fas fa-chart-line mr-2"></i>
                   Business
                 </a>
               </Link>
@@ -128,6 +131,7 @@ const Header: React.FC = () => {
             <li>
               <Link href="/category/technology">
                 <a className={`nav-link ${location === '/category/technology' ? 'active' : ''}`}>
+                  <i className="fas fa-microchip mr-2"></i>
                   Technology
                 </a>
               </Link>
@@ -135,6 +139,7 @@ const Header: React.FC = () => {
             <li>
               <Link href="/category/sports">
                 <a className={`nav-link ${location === '/category/sports' ? 'active' : ''}`}>
+                  <i className="fas fa-football-ball mr-2"></i>
                   Sports
                 </a>
               </Link>
@@ -142,6 +147,7 @@ const Header: React.FC = () => {
             <li>
               <Link href="/category/entertainment">
                 <a className={`nav-link ${location === '/category/entertainment' ? 'active' : ''}`}>
+                  <i className="fas fa-film mr-2"></i>
                   Entertainment
                 </a>
               </Link>
@@ -149,6 +155,7 @@ const Header: React.FC = () => {
             <li>
               <Link href="/category/health">
                 <a className={`nav-link ${location === '/category/health' ? 'active' : ''}`}>
+                  <i className="fas fa-heartbeat mr-2"></i>
                   Health
                 </a>
               </Link>
@@ -156,6 +163,7 @@ const Header: React.FC = () => {
             <li>
               <Link href="/category/science">
                 <a className={`nav-link ${location === '/category/science' ? 'active' : ''}`}>
+                  <i className="fas fa-flask mr-2"></i>
                   Science
                 </a>
               </Link>
@@ -163,6 +171,7 @@ const Header: React.FC = () => {
             <li>
               <Link href="/category/world">
                 <a className={`nav-link ${location === '/category/world' ? 'active' : ''}`}>
+                  <i className="fas fa-globe mr-2"></i>
                   World
                 </a>
               </Link>
