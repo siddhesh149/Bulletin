@@ -10,7 +10,6 @@ type Article = {
   summary: string;
   category: string;
   authorName: string;
-  authorImageUrl: string;
   createdAt: string;
 };
 
@@ -79,11 +78,6 @@ const OpinionSection: React.FC = () => {
                     <p className="text-sm text-neutral-600 mb-2">{article.summary}</p>
                     <div className="flex items-center justify-between">
                       <div className="flex items-center">
-                        <img 
-                          src={article.authorImageUrl || 'https://via.placeholder.com/40'} 
-                          alt={article.authorName} 
-                          className="w-8 h-8 rounded-full mr-2"
-                        />
                         <span className="text-sm font-semibold">{article.authorName}</span>
                       </div>
                       <span className="text-xs text-neutral-600">
