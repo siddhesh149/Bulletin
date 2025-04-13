@@ -106,10 +106,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(404).json({ message: "Article not found" });
       }
       
-      // Get view count
+      // Get current view count
       const viewCount = await storage.getArticleViewCount(article.id);
       
-      // Record a view
+      // Record a new view
       const ipAddress = req.headers['x-forwarded-for'] as string || req.socket.remoteAddress || '';
       await storage.recordArticleView(article.id, ipAddress);
       
@@ -118,7 +118,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const filteredRelatedArticles = relatedArticles.filter(related => related.id !== article.id);
       
       res.json({
-        article: { ...article, viewCount: viewCount + 1 }, // +1 for the current view
+        article: { ...article, viewCount: viewCount + 1 }, // Add 1 to include the current view
         relatedArticles: filteredRelatedArticles.slice(0, 3) // Limit to 3 related articles
       });
     } catch (error) {

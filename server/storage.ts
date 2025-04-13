@@ -187,6 +187,7 @@ export class DatabaseStorage implements IStorage {
         .values({
           articleId,
           ipAddress: ipAddress || null,
+          viewedAt: new Date(),
         })
         .returning();
       return view;
