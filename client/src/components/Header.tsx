@@ -62,9 +62,9 @@ const Header: React.FC = () => {
       <div className="container mx-auto px-4 py-3 flex justify-between items-center">
         <div className="flex items-center">
           <Link href="/">
-            <a className="flex items-center">
-              <img src="/LNM.svg" alt="Latest News Media Logo" className="h-12 mr-3" />
-              <span className="text-3xl md:text-4xl font-bold font-times text-primary">
+            <a className="flex items-center gap-4">
+              <img src="/LNM.svg" alt="LNM" className="h-16 w-auto" />
+              <span className="text-3xl md:text-4xl font-bold font-['Times_New_Roman'] text-primary">
                 Latest News Media
               </span>
             </a>

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
   <style>
-    .logo-text { fill: #1e3a8a; font-family: Arial, sans-serif; font-weight: bold; }
+    .logo-text { fill: #1e3a8a; font-family: 'Arial Black', sans-serif; font-weight: 900; }
     .slash { fill: #1e3a8a; }
   </style>
-  <g transform="translate(20,120)">
-    <text x="0" y="0" class="logo-text" font-size="80">L</text>
-    <text x="50" y="0" class="logo-text" font-size="80">N</text>
-    <text x="110" y="0" class="logo-text" font-size="80">M</text>
-    <path class="slash" d="M45,-60 L55,-20 L35,-20 Z" />
-    <path class="slash" d="M105,-60 L115,-20 L95,-20 Z" />
+  <g transform="translate(10,130)">
+    <text x="0" y="0" class="logo-text" font-size="100">L</text>
+    <text x="60" y="0" class="logo-text" font-size="100">N</text>
+    <text x="130" y="0" class="logo-text" font-size="100">M</text>
+    <path class="slash" d="M55,-70 L70,-20 L40,-20 Z" />
+    <path class="slash" d="M125,-70 L140,-20 L110,-20 Z" />
   </g>
 </svg> 
