@@ -7,12 +7,12 @@ type ArticleCardProps = {
   id: number;
   title: string;
   slug: string;
-  summary?: string;
+  summary: string;
   imageUrl: string;
   category: string;
   viewCount: number;
   createdAt: string;
-  compact?: boolean;
+  size?: 'small' | 'medium' | 'large';
 };
 
 const getCategoryColor = (category: string): string => {
@@ -37,7 +37,7 @@ const ArticleCard: React.FC<ArticleCardProps> = ({
   category,
   viewCount,
   createdAt,
-  compact = false
+  size = 'medium'
 }) => {
   const [imgError, setImgError] = useState(false);
   const fallbackImage = "https://via.placeholder.com/800x600?text=News+Media";
@@ -46,7 +46,7 @@ const ArticleCard: React.FC<ArticleCardProps> = ({
     setImgError(true);
   };
 
-  if (compact) {
+  if (size === 'small') {
     return (
       <Link href={`/article/${slug}`}>
         <a className="flex gap-3 hover:text-primary">
@@ -85,11 +85,13 @@ const ArticleCard: React.FC<ArticleCardProps> = ({
           <div className="p-4">
             <h3 className="text-lg font-headline font-bold mt-2 mb-2">{title}</h3>
             {summary && <p className="text-sm text-neutral-600 mb-2">{summary}</p>}
-            <div className="flex flex-col gap-2 text-sm text-neutral-600">
+            <div className="flex items-center text-sm text-neutral-600 mt-2">
               <span>
                 <i className="far fa-clock mr-1"></i> <TimeAgo timestamp={createdAt} />
               </span>
-              <ViewCounter count={viewCount} />
+              <span className="ml-3">
+                <ViewCounter count={viewCount} />
+              </span>
             </div>
           </div>
         </article>

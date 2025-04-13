@@ -16,8 +16,6 @@ type Article = {
   content: string;
   imageUrl: string;
   category: string;
-  authorName: string;
-  authorImageUrl: string;
   viewCount: number;
   createdAt: string;
 };
@@ -135,13 +133,7 @@ const ArticlePage: React.FC = () => {
           
           <div className="flex flex-wrap items-center justify-between py-3 border-t border-b text-sm">
             <div className="flex items-center mb-2 md:mb-0">
-              <img 
-                src={article.authorImageUrl || 'https://via.placeholder.com/40'} 
-                alt={article.authorName} 
-                className="w-8 h-8 rounded-full mr-2"
-              />
               <div>
-                <span className="font-semibold">{article.authorName}</span>
                 <div>
                   <span className="text-neutral-600">
                     <i className="far fa-clock mr-1"></i> <TimeAgo timestamp={article.createdAt} />

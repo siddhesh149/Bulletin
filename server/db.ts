@@ -6,17 +6,17 @@ import { env } from "./env";
 const MAX_RETRIES = 5;
 const RETRY_DELAY = 5000; // 5 seconds
 
-// Initialize the database connection with the validated connection string
-const connectionString: string = env.DATABASE_URL;
+// Use the connection string directly for testing
+const connectionString = 'postgresql://siddhesh:ECnritSNWDaN4Lu8nfn0Nw@giant-fairy-10025.j77.aws-ap-south-1.cockroachlabs.cloud:26257/defaultdb?sslmode=verify-full';
 
 // Configure postgres with more resilient settings
 const client = postgres(connectionString, {
+  ssl: {
+    rejectUnauthorized: true // Required for CockroachDB cloud
+  },
   max: 1,
   idle_timeout: 20,
   connect_timeout: 30,
-  ssl: {
-    rejectUnauthorized: false // Required for CockroachDB
-  },
   connection: {
     application_name: 'NewsBulletin'
   },
@@ -39,8 +39,13 @@ async function createDbConnection() {
       const maskedUrl = connectionString.replace(/:[^:@]+@/, ':****@');
       log(`Attempting database connection (attempt ${retryCount + 1}/${MAX_RETRIES}) to ${maskedUrl}`);
       
-      // Test the connection
-      await client`SELECT 1`;
+      // Test the connection with a timeout
+      const connectionPromise = client`SELECT 1`;
+      const timeoutPromise = new Promise((_, reject) => 
+        setTimeout(() => reject(new Error('Connection timeout')), 10000)
+      );
+      
+      await Promise.race([connectionPromise, timeoutPromise]);
       log('Database connection successful');
       return client;
     } catch (error: any) {
