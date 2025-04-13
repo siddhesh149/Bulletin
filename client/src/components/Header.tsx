@@ -73,15 +73,16 @@ const Header: React.FC = () => {
               <img 
                 src="/LNM.svg" 
                 alt="LNM" 
-                className="h-14 w-auto transition-transform hover:scale-105" 
+                className="h-14 w-auto" 
                 style={{ 
                   filter: 'drop-shadow(2px 2px 4px rgba(0,0,0,0.1))',
-                  maxWidth: '100%',
-                  height: 'auto'
+                  width: '56px',
+                  height: '56px',
+                  objectFit: 'contain'
                 }} 
               />
               <span 
-                className="text-3xl md:text-4xl font-bold text-primary transition-colors" 
+                className="text-3xl md:text-4xl font-bold text-primary" 
                 style={{ 
                   fontFamily: 'Times New Roman, serif',
                   letterSpacing: '-0.02em'
