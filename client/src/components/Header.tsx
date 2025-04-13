@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'wouter';
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import '../styles/header.css';
 
 const Header: React.FC = () => {
   const [location] = useLocation();
@@ -86,7 +87,7 @@ const Header: React.FC = () => {
           </Link>
         </div>
         <div className="flex items-center">
-          <div className="block md:hidden">
+          <div className="mobile-menu-button">
             <button
               className="inline-flex items-center justify-center p-3 hover:bg-gray-100 rounded-md transition-colors text-gray-800"
               onClick={toggleMobileMenu}
@@ -102,7 +103,7 @@ const Header: React.FC = () => {
       {/* Navigation */}
       <nav className="bg-primary w-full">
         <div className="container mx-auto px-4">
-          <ul className="hidden md:flex space-x-1">
+          <ul className="nav-menu space-x-1">
             <li>
               <Link href="/">
                 <a className={`px-4 py-3 inline-block hover:bg-blue-900 text-white transition-colors ${location === '/' ? 'bg-blue-900' : ''}`}>
