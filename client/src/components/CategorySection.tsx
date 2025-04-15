@@ -2,7 +2,6 @@ import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Link } from 'wouter';
 import TimeAgo from './TimeAgo';
-import ViewCounter from './ViewCounter';
 
 type Article = {
   id: number;
@@ -11,7 +10,6 @@ type Article = {
   summary: string;
   imageUrl: string;
   category: string;
-  viewCount: number;
   createdAt: string;
 };
 
@@ -90,7 +88,6 @@ const CategorySection: React.FC<CategorySectionProps> = ({
                     <span className="mr-3">
                       <i className="far fa-clock mr-1"></i> <TimeAgo timestamp={article.createdAt} />
                     </span>
-                    <ViewCounter count={article.viewCount} />
                   </div>
                 </div>
               </a>
