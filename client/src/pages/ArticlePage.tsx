@@ -4,7 +4,6 @@ import { useQuery } from '@tanstack/react-query';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import TimeAgo from '@/components/TimeAgo';
-import ViewCounter from '@/components/ViewCounter';
 import ArticleCard from '@/components/ArticleCard';
 import { Separator } from '@/components/ui/separator';
 import { getQueryFn } from '@/lib/queryClient';
@@ -17,7 +16,6 @@ type Article = {
   content: string;
   imageUrl: string;
   category: string;
-  viewCount: number;
   createdAt: string;
 };
 
@@ -139,9 +137,6 @@ const ArticlePage: React.FC = () => {
                 <div>
                   <span className="text-neutral-600">
                     <i className="far fa-clock mr-1"></i> <TimeAgo timestamp={article.createdAt} />
-                  </span>
-                  <span className="text-neutral-600 ml-3">
-                    <ViewCounter count={article.viewCount} />
                   </span>
                 </div>
               </div>

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'wouter';
 import TimeAgo from './TimeAgo';
-import ViewCounter from './ViewCounter';
 
 type ArticleCardProps = {
   id: number;
@@ -10,7 +9,6 @@ type ArticleCardProps = {
   summary: string;
   imageUrl: string;
   category: string;
-  viewCount: number;
   createdAt: string;
   size?: 'small' | 'medium' | 'large';
 };
@@ -35,7 +33,6 @@ const ArticleCard: React.FC<ArticleCardProps> = ({
   summary,
   imageUrl,
   category,
-  viewCount,
   createdAt,
   size = 'medium'
 }) => {
@@ -88,9 +85,6 @@ const ArticleCard: React.FC<ArticleCardProps> = ({
             <div className="flex items-center text-sm text-neutral-600 mt-2">
               <span>
                 <i className="far fa-clock mr-1"></i> <TimeAgo timestamp={createdAt} />
-              </span>
-              <span className="ml-3">
-                <ViewCounter count={viewCount} />
               </span>
             </div>
           </div>
