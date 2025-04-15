@@ -1,0 +1,222 @@
+NEWS BULLETIN - DATABASE MANAGEMENT GUIDE
+=====================================
+
+This guide explains how to directly manage the News Bulletin database using SQL commands.
+
+TABLE OF CONTENTS
+----------------
+1. Connecting to the Database
+2. Article Management
+3. Breaking News Management
+4. Database Maintenance
+5. Common SQL Commands
+
+1. CONNECTING TO THE DATABASE
+---------------------------
+To connect to the PostgreSQL database:
+
+a) Using psql command line:
+   ```
+   psql -U your_username -d bulletin_db
+   ```
+   Replace 'your_username' with your database username and 'bulletin_db' with your database name.
+
+b) If prompted for password, enter your database password.
+
+2. ARTICLE MANAGEMENT
+--------------------
+Here are the SQL commands for managing articles:
+
+a) View all articles:
+   ```sql
+   SELECT * FROM articles ORDER BY created_at DESC;
+   ```
+
+b) Add a new article:
+   ```sql
+   INSERT INTO articles (
+     title, slug, summary, content, image_url, 
+     category, author_name, tags, published, 
+     featured_order, created_at, updated_at
+   ) VALUES (
+     'Your Article Title',
+     'your-article-slug',
+     'Brief summary of the article',
+     'Full article content with HTML formatting',
+     'https://example.com/image.jpg',
+     'Category Name',
+     'Author Name',
+     '["tag1", "tag2", "tag3"]',
+     true,
+     1,  -- Set to 1 for main headline, 2-4 for featured section, 0 or null for not featured
+     CURRENT_TIMESTAMP,
+     CURRENT_TIMESTAMP
+   );
+   ```
+
+c) Update an article:
+   ```sql
+   UPDATE articles 
+   SET 
+     title = 'Updated Title',
+     summary = 'Updated summary',
+     content = 'Updated content',
+     image_url = 'https://example.com/new-image.jpg',
+     category = 'Updated Category',
+     author_name = 'Updated Author',
+     tags = '["updated-tag1", "updated-tag2"]',
+     featured_order = 1,
+     updated_at = CURRENT_TIMESTAMP
+   WHERE id = 'article-uuid-here';
+   ```
+
+d) Delete an article:
+   ```sql
+   DELETE FROM articles WHERE id = 'article-uuid-here';
+   ```
+
+e) Feature an article (make it headline):
+   ```sql
+   -- First, unfeature any current headline
+   UPDATE articles SET featured_order = NULL WHERE featured_order = 1;
+   
+   -- Then set the new article as headline
+   UPDATE articles SET featured_order = 1 WHERE id = 'article-uuid-here';
+   ```
+
+f) Find articles by category:
+   ```sql
+   SELECT * FROM articles WHERE category = 'Category Name';
+   ```
+
+g) Find articles by author:
+   ```sql
+   SELECT * FROM articles WHERE author_name = 'Author Name';
+   ```
+
+3. BREAKING NEWS MANAGEMENT
+-------------------------
+Here are the SQL commands for managing breaking news:
+
+a) View all breaking news:
+   ```sql
+   SELECT * FROM breaking_news ORDER BY created_at DESC;
+   ```
+
+b) Add new breaking news:
+   ```sql
+   INSERT INTO breaking_news (
+     content, active, created_at, updated_at
+   ) VALUES (
+     'Breaking news content here',
+     true,
+     CURRENT_TIMESTAMP,
+     CURRENT_TIMESTAMP
+   );
+   ```
+
+c) Update breaking news:
+   ```sql
+   UPDATE breaking_news 
+   SET 
+     content = 'Updated breaking news content',
+     active = true,
+     updated_at = CURRENT_TIMESTAMP
+   WHERE id = 'breaking-news-uuid-here';
+   ```
+
+d) Delete breaking news:
+   ```sql
+   DELETE FROM breaking_news WHERE id = 'breaking-news-uuid-here';
+   ```
+
+e) Deactivate breaking news:
+   ```sql
+   UPDATE breaking_news SET active = false WHERE id = 'breaking-news-uuid-here';
+   ```
+
+4. DATABASE MAINTENANCE
+---------------------
+Here are commands for database maintenance:
+
+a) Backup the database:
+   ```
+   pg_dump -U your_username -d bulletin_db > backup_filename.sql
+   ```
+
+b) Restore from backup:
+   ```
+   psql -U your_username -d bulletin_db < backup_filename.sql
+   ```
+
+c) Vacuum the database (reclaim space and update statistics):
+   ```sql
+   VACUUM ANALYZE;
+   ```
+
+d) Check table sizes:
+   ```sql
+   SELECT 
+     table_name, 
+     pg_size_pretty(pg_total_relation_size(quote_ident(table_name))) as total_size
+   FROM information_schema.tables 
+   WHERE table_schema = 'public'
+   ORDER BY pg_total_relation_size(quote_ident(table_name)) DESC;
+   ```
+
+5. COMMON SQL COMMANDS
+--------------------
+Useful SQL commands for database management:
+
+a) View table structure:
+   ```sql
+   \d articles
+   \d breaking_news
+   ```
+
+b) List all tables:
+   ```sql
+   \dt
+   ```
+
+c) Search articles by title:
+   ```sql
+   SELECT * FROM articles WHERE title ILIKE '%search term%';
+   ```
+
+d) Count articles by category:
+   ```sql
+   SELECT category, COUNT(*) FROM articles GROUP BY category;
+   ```
+
+e) Find recent articles:
+   ```sql
+   SELECT * FROM articles 
+   WHERE created_at >= CURRENT_DATE - INTERVAL '7 days'
+   ORDER BY created_at DESC;
+   ```
+
+f) Find articles with missing images:
+   ```sql
+   SELECT * FROM articles WHERE image_url IS NULL OR image_url = '';
+   ```
+
+IMPORTANT NOTES:
+--------------
+1. Always backup your database before making significant changes
+2. Be careful with DELETE commands - they cannot be undone
+3. When updating articles, make sure to update the updated_at timestamp
+4. Use transactions for multiple related changes:
+   ```sql
+   BEGIN;
+   -- Your SQL commands here
+   COMMIT;
+   ```
+   Or to rollback:
+   ```sql
+   BEGIN;
+   -- Your SQL commands here
+   ROLLBACK;
+   ```
+
+For additional help, contact the system administrator. 
