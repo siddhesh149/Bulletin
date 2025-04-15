@@ -43,3 +43,6 @@ Thumbs.db
 server/public
 vite.config.ts.*
 *.tar.gz
+
+# Database management guide
+DATABASE_MANAGEMENT.txt
