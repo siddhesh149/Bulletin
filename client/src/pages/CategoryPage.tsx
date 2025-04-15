@@ -14,7 +14,6 @@ type Article = {
   summary: string;
   imageUrl: string;
   category: string;
-  viewCount: number;
   createdAt: string;
 };
 
@@ -93,8 +92,8 @@ const CategoryPage: React.FC = () => {
                   summary={article.summary}
                   imageUrl={article.imageUrl}
                   category={article.category}
-                  viewCount={article.viewCount}
                   createdAt={article.createdAt}
+                  size="small"
                 />
               ))}
             </div>

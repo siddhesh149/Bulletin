@@ -181,14 +181,14 @@ const ArticlePage: React.FC = () => {
               <ul className="space-y-4">
                 {relatedArticles.map((related) => (
                   <li key={related.id}>
-                    <ArticleCard 
+                    <ArticleCard
+                      key={related.id}
                       id={related.id}
                       title={related.title}
                       slug={related.slug}
                       summary={related.summary}
                       imageUrl={related.imageUrl}
                       category={related.category}
-                      viewCount={related.viewCount}
                       createdAt={related.createdAt}
                       size="small"
                     />

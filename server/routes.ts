@@ -16,16 +16,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const offset = req.query.offset ? parseInt(req.query.offset as string) : 0;
       
       const articles = await storage.getArticles(limit, offset);
-      
-      // Add view counts to each article
-      const articlesWithViewCounts = await Promise.all(
-        articles.map(async (article) => {
-          const viewCount = await storage.getArticleViewCount(article.id);
-          return { ...article, viewCount };
-        })
-      );
-      
-      res.json(articlesWithViewCounts);
+      res.json(articles);
     } catch (error) {
       console.error("Error fetching articles:", error);
       res.status(500).json({ message: "Failed to fetch articles" });
@@ -35,18 +26,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.get(`${apiRouter}/articles/featured`, async (req: Request, res: Response) => {
     try {
       const limit = req.query.limit ? parseInt(req.query.limit as string) : 3;
-      
       const articles = await storage.getFeaturedArticles(limit);
-      
-      // Add view counts to each article
-      const articlesWithViewCounts = await Promise.all(
-        articles.map(async (article) => {
-          const viewCount = await storage.getArticleViewCount(article.id);
-          return { ...article, viewCount };
-        })
-      );
-      
-      res.json(articlesWithViewCounts);
+      res.json(articles);
     } catch (error) {
       console.error("Error fetching featured articles:", error);
       res.status(500).json({ message: "Failed to fetch featured articles" });
@@ -56,18 +37,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.get(`${apiRouter}/articles/latest`, async (req: Request, res: Response) => {
     try {
       const limit = req.query.limit ? parseInt(req.query.limit as string) : 4;
-      
       const articles = await storage.getLatestArticles(limit);
-      
-      // Add view counts to each article
-      const articlesWithViewCounts = await Promise.all(
-        articles.map(async (article) => {
-          const viewCount = await storage.getArticleViewCount(article.id);
-          return { ...article, viewCount };
-        })
-      );
-      
-      res.json(articlesWithViewCounts);
+      res.json(articles);
     } catch (error) {
       console.error("Error fetching latest articles:", error);
       res.status(500).json({ message: "Failed to fetch latest articles" });
@@ -81,16 +52,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const offset = req.query.offset ? parseInt(req.query.offset as string) : 0;
       
       const articles = await storage.getArticlesByCategory(category, limit, offset);
-      
-      // Add view counts to each article
-      const articlesWithViewCounts = await Promise.all(
-        articles.map(async (article) => {
-          const viewCount = await storage.getArticleViewCount(article.id);
-          return { ...article, viewCount };
-        })
-      );
-      
-      res.json(articlesWithViewCounts);
+      res.json(articles);
     } catch (error) {
       console.error(`Error fetching articles for category ${req.params.category}:`, error);
       res.status(500).json({ message: "Failed to fetch articles by category" });
