@@ -77,32 +77,31 @@ const HeroSection: React.FC = () => {
   const [mainArticle, ...secondaryArticles] = articles;
 
   return (
-    <section className="py-6">
+    <section className="py-4">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
           {/* Main featured article */}
           <div className="lg:col-span-2">
             <Link href={`/article/${mainArticle.slug}`}>
               <a className="block">
-                <article className="bg-white shadow-sm hover:shadow-md transition">
-                  <div>
+                <article className="bg-white rounded-lg shadow-sm hover:shadow transition-shadow duration-200">
+                  <div className="relative">
                     <img 
                       src={mainImgError ? fallbackImage : mainArticle.imageUrl} 
                       alt={mainArticle.title} 
-                      className="w-full aspect-[9/16] object-cover"
+                      className="w-full aspect-video object-cover rounded-t-lg"
                       onError={handleMainImageError}
                     />
-                    <div className="p-4">
-                      <span className="bg-primary text-white text-xs px-2 py-1">
-                        {mainArticle.category.charAt(0).toUpperCase() + mainArticle.category.slice(1)}
-                      </span>
-                      <h2 className="text-xl font-headline font-bold mt-2 mb-2">{mainArticle.title}</h2>
-                      <p className="text-neutral-600 mb-2 line-clamp-2">{mainArticle.summary}</p>
-                      <div className="flex items-center text-sm text-neutral-600">
-                        <span className="mr-3">
-                          <i className="far fa-clock mr-1"></i> <TimeAgo timestamp={mainArticle.createdAt} />
-                        </span>
-                      </div>
+                    <span className="absolute top-2 left-2 bg-primary text-white text-xs px-2 py-1 rounded">
+                      {mainArticle.category.charAt(0).toUpperCase() + mainArticle.category.slice(1)}
+                    </span>
+                  </div>
+                  <div className="p-3">
+                    <h2 className="text-lg font-headline font-bold mb-1 line-clamp-2">{mainArticle.title}</h2>
+                    <p className="text-sm text-neutral-600 mb-2 line-clamp-2">{mainArticle.summary}</p>
+                    <div className="flex items-center text-xs text-neutral-500">
+                      <i className="far fa-clock mr-1"></i>
+                      <TimeAgo timestamp={mainArticle.createdAt} />
                     </div>
                   </div>
                 </article>
@@ -111,28 +110,27 @@ const HeroSection: React.FC = () => {
           </div>
           
           {/* Secondary featured articles */}
-          <div className="space-y-6">
+          <div className="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-4">
             {secondaryArticles.map((article) => (
               <Link key={article.id} href={`/article/${article.slug}`}>
                 <a className="block">
-                  <article className="bg-white shadow-sm hover:shadow-md transition">
-                    <div className="flex flex-col sm:flex-row lg:flex-col">
+                  <article className="bg-white rounded-lg shadow-sm hover:shadow transition-shadow duration-200">
+                    <div className="relative">
                       <img 
                         src={secondaryImgErrors[article.id] ? fallbackImage : article.imageUrl} 
                         alt={article.title} 
-                        className="w-full sm:w-1/3 lg:w-full aspect-[9/16] object-cover"
+                        className="w-full aspect-video object-cover rounded-t-lg"
                         onError={() => handleSecondaryImageError(article.id)}
                       />
-                      <div className="p-4 sm:w-2/3 lg:w-full">
-                        <span className="bg-primary text-white text-xs px-2 py-1">
-                          {article.category.charAt(0).toUpperCase() + article.category.slice(1)}
-                        </span>
-                        <h2 className="text-xl font-headline font-bold mt-2 mb-3">{article.title}</h2>
-                        <div className="flex items-center text-sm text-neutral-600">
-                          <span className="mr-3">
-                            <i className="far fa-clock mr-1"></i> <TimeAgo timestamp={article.createdAt} />
-                          </span>
-                        </div>
+                      <span className="absolute top-2 left-2 bg-primary text-white text-xs px-2 py-1 rounded">
+                        {article.category.charAt(0).toUpperCase() + article.category.slice(1)}
+                      </span>
+                    </div>
+                    <div className="p-3">
+                      <h3 className="text-sm font-headline font-bold mb-1 line-clamp-2">{article.title}</h3>
+                      <div className="flex items-center text-xs text-neutral-500">
+                        <i className="far fa-clock mr-1"></i>
+                        <TimeAgo timestamp={article.createdAt} />
                       </div>
                     </div>
                   </article>

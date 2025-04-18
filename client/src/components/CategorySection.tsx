@@ -63,31 +63,34 @@ const CategorySection: React.FC<CategorySectionProps> = ({
   const displayArticles = articles.slice(0, limit);
 
   return (
-    <div className="mb-10">
-      <div className="flex justify-between items-center mb-4">
-        <h2 className="text-2xl font-headline font-bold border-l-4 border-primary pl-3">{displayName}</h2>
+    <div className="mb-6">
+      <div className="flex justify-between items-center mb-3">
+        <h2 className="text-xl font-headline font-bold border-l-4 border-primary pl-3">{displayName}</h2>
         <Link href={`/category/${category}`}>
-          <a className="text-primary hover:underline">More {displayName} News</a>
+          <a className="text-primary hover:underline text-sm">More {displayName} News</a>
         </Link>
       </div>
       
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
         {displayArticles.map((article) => (
-          <article key={article.id} className="bg-white shadow-sm">
+          <article key={article.id} className="bg-white rounded-lg shadow-sm hover:shadow transition-shadow duration-200">
             <Link href={`/article/${article.slug}`}>
               <a>
-                <img 
-                  src={article.imageUrl} 
-                  alt={article.title} 
-                  className="w-full aspect-[9/16] object-cover"
-                />
-                <div className="p-3">
-                  <h3 className="text-base font-headline font-bold mb-1 line-clamp-2">{article.title}</h3>
-                  <p className="text-xs text-neutral-600 mb-2 line-clamp-2">{article.summary}</p>
-                  <div className="flex items-center text-xs text-neutral-600">
-                    <span>
-                      <i className="far fa-clock mr-1"></i> <TimeAgo timestamp={article.createdAt} />
-                    </span>
+                <div className="relative">
+                  <img 
+                    src={article.imageUrl} 
+                    alt={article.title} 
+                    className="w-full aspect-video object-cover rounded-t-lg"
+                  />
+                  <span className="absolute top-2 left-2 bg-primary text-white text-xs px-2 py-0.5 rounded">
+                    {article.category.charAt(0).toUpperCase() + article.category.slice(1)}
+                  </span>
+                </div>
+                <div className="p-2">
+                  <h3 className="text-sm font-headline font-semibold mb-1 line-clamp-2 hover:text-primary">{article.title}</h3>
+                  <div className="flex items-center text-xs text-neutral-500">
+                    <i className="far fa-clock mr-1"></i>
+                    <TimeAgo timestamp={article.createdAt} />
                   </div>
                 </div>
               </a>
