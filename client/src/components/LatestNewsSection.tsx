@@ -78,23 +78,23 @@ const LatestNewsSection: React.FC = () => {
           <a href="#" className="text-primary hover:underline">View All</a>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {latestArticles.map((article) => (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+          {latestArticles.slice(0, 10).map((article) => (
             <article key={article.id} className="border-b pb-4 md:border-b-0 md:pb-0">
               <Link href={`/article/${article.slug}`}>
                 <a>
                   <img 
                     src={imgErrors[article.id] ? fallbackImage : article.imageUrl} 
                     alt={article.title} 
-                    className="w-full h-48 object-cover mb-3"
+                    className="w-full aspect-[9/16] object-cover mb-2"
                     onError={() => handleImageError(article.id)}
                   />
                   <span className="bg-primary text-white text-xs px-2 py-1">
                     {article.category.charAt(0).toUpperCase() + article.category.slice(1)}
                   </span>
-                  <h3 className="text-lg font-headline font-bold mt-2 mb-2">{article.title}</h3>
-                  <div className="flex items-center text-sm text-neutral-600">
-                    <span className="mr-3">
+                  <h3 className="text-base font-headline font-bold mt-2 mb-1 line-clamp-2">{article.title}</h3>
+                  <div className="flex items-center text-xs text-neutral-600">
+                    <span>
                       <i className="far fa-clock mr-1"></i> <TimeAgo timestamp={article.createdAt} />
                     </span>
                   </div>

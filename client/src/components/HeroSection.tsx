@@ -89,15 +89,15 @@ const HeroSection: React.FC = () => {
                     <img 
                       src={mainImgError ? fallbackImage : mainArticle.imageUrl} 
                       alt={mainArticle.title} 
-                      className="w-full h-64 lg:h-80 object-cover"
+                      className="w-full aspect-[9/16] object-cover"
                       onError={handleMainImageError}
                     />
                     <div className="p-4">
                       <span className="bg-primary text-white text-xs px-2 py-1">
                         {mainArticle.category.charAt(0).toUpperCase() + mainArticle.category.slice(1)}
                       </span>
-                      <h2 className="text-2xl font-headline font-bold mt-2 mb-3">{mainArticle.title}</h2>
-                      <p className="text-neutral-600 mb-3">{mainArticle.summary}</p>
+                      <h2 className="text-xl font-headline font-bold mt-2 mb-2">{mainArticle.title}</h2>
+                      <p className="text-neutral-600 mb-2 line-clamp-2">{mainArticle.summary}</p>
                       <div className="flex items-center text-sm text-neutral-600">
                         <span className="mr-3">
                           <i className="far fa-clock mr-1"></i> <TimeAgo timestamp={mainArticle.createdAt} />
@@ -120,7 +120,7 @@ const HeroSection: React.FC = () => {
                       <img 
                         src={secondaryImgErrors[article.id] ? fallbackImage : article.imageUrl} 
                         alt={article.title} 
-                        className="w-full sm:w-1/3 lg:w-full h-48 object-cover"
+                        className="w-full sm:w-1/3 lg:w-full aspect-[9/16] object-cover"
                         onError={() => handleSecondaryImageError(article.id)}
                       />
                       <div className="p-4 sm:w-2/3 lg:w-full">

@@ -71,7 +71,7 @@ const CategorySection: React.FC<CategorySectionProps> = ({
         </Link>
       </div>
       
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
         {displayArticles.map((article) => (
           <article key={article.id} className="bg-white shadow-sm">
             <Link href={`/article/${article.slug}`}>
@@ -79,13 +79,13 @@ const CategorySection: React.FC<CategorySectionProps> = ({
                 <img 
                   src={article.imageUrl} 
                   alt={article.title} 
-                  className="w-full h-48 object-cover"
+                  className="w-full aspect-[9/16] object-cover"
                 />
-                <div className="p-4">
-                  <h3 className="text-lg font-headline font-bold mb-2">{article.title}</h3>
-                  <p className="text-sm text-neutral-600 mb-2">{article.summary}</p>
+                <div className="p-3">
+                  <h3 className="text-base font-headline font-bold mb-1 line-clamp-2">{article.title}</h3>
+                  <p className="text-xs text-neutral-600 mb-2 line-clamp-2">{article.summary}</p>
                   <div className="flex items-center text-xs text-neutral-600">
-                    <span className="mr-3">
+                    <span>
                       <i className="far fa-clock mr-1"></i> <TimeAgo timestamp={article.createdAt} />
                     </span>
                   </div>
