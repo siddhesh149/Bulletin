@@ -25,7 +25,7 @@ const CategoryPage: React.FC = () => {
   const [page, setPage] = React.useState(1);
 
   const { data: articles, isLoading, error } = useQuery<Article[]>({
-    queryKey: [`/api/articles/category/${category}?limit=${ARTICLES_PER_PAGE}&offset=${(page - 1) * ARTICLES_PER_PAGE}`, category, page],
+    queryKey: [`/api/articles/category/${category.toLowerCase()}?limit=${ARTICLES_PER_PAGE}&offset=${(page - 1) * ARTICLES_PER_PAGE}`, category, page],
     queryFn: getQueryFn<Article[]>({ on401: "throw" }),
     enabled: !!category,
   });

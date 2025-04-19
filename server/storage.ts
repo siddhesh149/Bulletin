@@ -91,7 +91,10 @@ export class DatabaseStorage implements IStorage {
     try {
       return await db.select()
         .from(articles)
-        .where(and(eq(articles.published, true), eq(articles.category, category)))
+        .where(and(
+          eq(articles.published, true),
+          sql`LOWER(${articles.category}) = LOWER(${category})`
+        ))
         .orderBy(desc(articles.createdAt))
         .limit(limit)
         .offset(offset);
