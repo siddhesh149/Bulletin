@@ -1,7 +1,6 @@
 import React from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import BreakingNewsTicker from '@/components/BreakingNewsTicker';
 import HeroSection from '@/components/HeroSection';
 import LatestNewsSection from '@/components/LatestNewsSection';
 import CategorySection from '@/components/CategorySection';
@@ -10,7 +9,6 @@ const HomePage: React.FC = () => {
   return (
     <div className="bg-neutral-100 font-body text-neutral-800">
       <Header />
-      <BreakingNewsTicker />
       <HeroSection />
       <LatestNewsSection />
       
