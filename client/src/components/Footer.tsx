@@ -94,13 +94,9 @@ const Footer: React.FC = () => {
           <div>
             <h4 className="text-lg font-bold mb-4">Contact Us</h4>
             <address className="text-neutral-300 not-italic">
-              <p>123 News Street</p>
               <p>New Delhi, India</p>
               <p className="mt-3">
                 <a href="mailto:info@newsmedia.com" className="hover:text-white">info@newsmedia.com</a>
-              </p>
-              <p>
-                <a href="tel:+911234567890" className="hover:text-white">+91 123 456 7890</a>
               </p>
             </address>
           </div>
